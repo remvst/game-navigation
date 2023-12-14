@@ -15,6 +15,10 @@ export class SoundGamePlugin extends GamePlugin {
         super();
     }
 
+    setMuted(muted: boolean) {
+        Howler.mute(muted);
+    }
+
     playSoundEffect(howl: Howl, relativeVolume: number = 1) {
         howl.volume(this.effectsVolume * this.masterVolume * relativeVolume);
         return howl.play();

@@ -1,4 +1,5 @@
 import { Game } from "./game";
+import { Screen } from '../ui/screen';
 
 export abstract class GamePlugin {
 
@@ -10,6 +11,10 @@ export abstract class GamePlugin {
 
     bind(game: Game) {
         this.game = game;
+    }
+
+    setupScreen(screen: Screen): void {
+
     }
 
     abstract get key(): string;

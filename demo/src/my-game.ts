@@ -20,8 +20,5 @@ export class MyGame extends Game {
         this.screenStack.reset(new SpinningSquareScreen(0xffffff));
     }
 
-    setupScreen(screen: Screen): void {
-    }
-
     readonly container = document.querySelector('#game-container') as HTMLDivElement;
 }

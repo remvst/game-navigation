@@ -34,8 +34,6 @@ export abstract class Game<ParamsType extends GameParams = GameParams> {
 
     abstract get plugins(): GamePlugin[];
 
-    abstract setupScreen(screen: Screen): void;
-
     abstract get container(): HTMLElement;
 
     plugin<T extends GamePlugin>(keyProvider: (new (...params: any) => T) & {key: string}): T {

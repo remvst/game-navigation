@@ -26,7 +26,10 @@ export abstract class Screen {
 
     bind(game: Game) {
         this.game = game;
-        this.game.setupScreen(this);
+
+        for (const plugin of this.game.plugins) {
+            plugin.setupScreen(this);
+        }
 
         for (const sub of this.subscreens) {
             sub.bind(game);
@@ -143,7 +146,7 @@ export abstract class Screen {
 
     addDebugValues(values: {[key: string]: any}) {
         values['screen.id'] = this.id;
-        values['interpolations'] = this.interpolationPool.size;
+        values['screen.interpolations'] = this.interpolationPool.size;
     }
 
     get isForeground() {

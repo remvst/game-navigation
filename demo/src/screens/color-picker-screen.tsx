@@ -19,10 +19,15 @@ export class ColorPickerScreen extends ReactScreen {
             width: '100%',
             height: '100%',
             color: 'white',
+            backgroundColor: 'rgba(0,0,0,0.5)',
         }}>
             <h1>Pick a square color</h1>
             <button onClick={() => this.resolver.resolve(0xff0000)}>red square</button>
             <button onClick={() => this.resolver.resolve(0x0000ff)}>blue square</button>
         </div>);
+    }
+
+    get absorbCycle() {
+        return false;
     }
 }

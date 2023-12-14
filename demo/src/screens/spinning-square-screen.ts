@@ -1,6 +1,6 @@
 import { ColorPickerScreen } from './color-picker-screen';
 import { Keyboard, KeyBindingsSettings, BindingDefinition, BindingDefinitionSet, set, keyboard, isDown } from '@remvst/client-inputs';
-import { PIXIGamePlugin, PIXIScreen } from "@remvst/game-navigation-pixi";
+import { PIXIScreen } from "@remvst/game-navigation-pixi";
 import { Sprite, Texture } from "pixi.js";
 
 export class SpinningSquareScreen extends PIXIScreen {

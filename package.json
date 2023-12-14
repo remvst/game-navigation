@@ -4,10 +4,11 @@
   "description": "",
   "main": "lib/index.js",
   "scripts": {
-    "build:core": "cd core && npm run build",
-    "build:html": "cd html && npm run build",
-    "build:react": "cd react && npm run build",
-    "build:pixi": "cd pixi && npm run build",
+    "build:demo": "cd demo && npm run build",
+    "build:core": "cd game-navigation-core && npm run build",
+    "build:html": "cd game-navigation-html && npm run build",
+    "build:react": "cd game-navigation-react && npm run build",
+    "build:pixi": "cd game-navigation-pixi && npm run build",
     "build": "npm run build:core && npm run build:html && npm run build:react && npm run build:pixi",
     "postinstall": "scripts/fullinstall.sh"
   },

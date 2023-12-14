@@ -13,7 +13,6 @@ export class PIXIGamePlugin extends GamePlugin {
     screenContainer = new Container();
 
     // Rendering
-    private resolution: number;
     renderer: IRenderer<HTMLCanvasElement>;
 
     // Debugging
@@ -32,6 +31,7 @@ export class PIXIGamePlugin extends GamePlugin {
 
     constructor(
         readonly canvasContainer: HTMLElement,
+        private resolution: number = 1,
     ) {
         super();
     }
@@ -40,7 +40,7 @@ export class PIXIGamePlugin extends GamePlugin {
         this.debugger.position.set(5, this.game.params.height - 5);
         this.stage.addChild(this.screenContainer, this.debugger);
 
-        this.setResolution(this.game.params.resolution);
+        this.setResolution(this.resolution);
     }
 
     render(): void {
@@ -54,7 +54,7 @@ export class PIXIGamePlugin extends GamePlugin {
     }
 
     setResolution(resolution: number) {
-        if (resolution === this.resolution) {
+        if (resolution === this.resolution && this.renderer) {
             return;
         }
 

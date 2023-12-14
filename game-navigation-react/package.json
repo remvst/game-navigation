@@ -1,5 +1,5 @@
 {
-    "name": "@remvst/game-navigation-html",
+    "name": "@remvst/game-navigation-react",
     "version": "1.0.0",
     "description": "",
     "main": "lib/index.js",
@@ -9,8 +9,14 @@
     },
     "author": "Rémi Vansteelandt",
     "license": "UNLICENSED",
+    "dependencies": {
+      "@types/react-dom": "^18.2.0",
+      "react": "^18.2.0",
+      "react-dom": "^18.2.0"
+    },
     "peerDependencies": {
-        "@remvst/game-navigation-core": "file:../core"
+        "@remvst/game-navigation-core": "file:../game-navigation-core",
+        "@remvst/game-navigation-html": "file:../game-navigation-html"
     },
     "devDependencies": {
       "typescript": "^5.2.2"

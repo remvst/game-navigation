@@ -80,6 +80,8 @@ export class GameInputs implements Inputs {
         this.keyboard.setup();
         this.mouse.setup();
         this.gamepad.setup();
+
+        window.addEventListener('blur', () => this.reset(), false);
     }
 
     reset() {

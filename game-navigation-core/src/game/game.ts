@@ -9,8 +9,6 @@ export abstract class Game<ParamsType extends GameParams = GameParams> {
 
     private readonly pluginMap = new Map<string, GamePlugin>();
 
-    hasFocus = true;
-
     // Inputs
     inputs: GameInputs;
 
@@ -51,9 +49,6 @@ export abstract class Game<ParamsType extends GameParams = GameParams> {
             this.pluginMap.set(plugin.key, plugin);
         }
 
-        window.addEventListener('blur', () => this.windowHasFocus(false), false);
-        window.addEventListener('focus', () => this.windowHasFocus(true), false);
-
         this.inputs = new GameInputs(this);
         this.inputs.setup();
 
@@ -93,8 +88,7 @@ export abstract class Game<ParamsType extends GameParams = GameParams> {
         this.performanceRecorder.onStart('FRAME');
 
         const now = window.performance.now();
-        const elapsedMs = now - this.lastFrame;
-        const elapsed = Math.min(this.params.maxFrameInterval, elapsedMs / 1000);
+        const elapsed = (now - this.lastFrame) / 1000;
 
         this.lastFrame = now;
 
@@ -117,8 +111,8 @@ export abstract class Game<ParamsType extends GameParams = GameParams> {
         // Safety in case we resume the game after a while
         let adjusted = Math.min(elapsed, this.params.maxFrameInterval || 1);
 
-        if (this.params.automation) {
-            adjusted *= 5;
+        for (const plugin of this.plugins) {
+            adjusted *= plugin.timeFactor;
         }
 
         this.age += elapsed;
@@ -150,22 +144,6 @@ export abstract class Game<ParamsType extends GameParams = GameParams> {
             }
 
             (this.params as any)[param] = value;
-        }
-    }
-
-    windowHasFocus(hasFocus: boolean) {
-        this.hasFocus = hasFocus;
-
-        if (!hasFocus && this.params.pauseOnWindowBlur) {
-            this.stopLoop();
-        }
-
-        if (hasFocus) {
-            this.scheduleFrame();
-        }
-
-        if (!hasFocus) {
-            this.inputs.reset();
         }
     }
 

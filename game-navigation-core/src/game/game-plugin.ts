@@ -4,6 +4,10 @@ export abstract class GamePlugin {
 
     protected game: Game;
 
+    get timeFactor(): number {
+        return 1;
+    }
+
     bind(game: Game) {
         this.game = game;
     }

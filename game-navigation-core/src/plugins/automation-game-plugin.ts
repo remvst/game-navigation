@@ -1,4 +1,4 @@
-import { GamePlugin } from "@remvst/game-navigation-core";
+import { GamePlugin } from "../game/game-plugin";
 
 export class AutomationGamePlugin extends GamePlugin {
 
@@ -8,10 +8,8 @@ export class AutomationGamePlugin extends GamePlugin {
     // Debug
     protected automationLabel: HTMLDivElement;
 
-    constructor(
-        readonly htmlContainer: HTMLElement,
-    ) {
-        super();
+    get timeFactor(): number {
+        return 5;
     }
 
     setup(): void {

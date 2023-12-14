@@ -11,4 +11,8 @@ export * from './navigation/screen-stack';
 export * from './ui/screen-delegate';
 export * from './ui/screen';
 
+export * from './plugins/automation-game-plugin';
+export * from './plugins/blur-pausing-game-plugin';
+export * from './plugins/time-keys-game-plugin';
+
 export * from './util/math';

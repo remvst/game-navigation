@@ -9,9 +9,11 @@
     },
     "author": "Rémi Vansteelandt",
     "license": "UNLICENSED",
-    "dependencies": {
+    "peerDependencies": {
+        "@remvst/game-navigation-core": "file:../core"
     },
     "devDependencies": {
+      "pixi.js": "^7.3.2",
       "typescript": "^5.2.2"
     }
   }

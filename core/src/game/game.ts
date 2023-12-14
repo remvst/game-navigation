@@ -25,9 +25,6 @@ export abstract class Game<ParamsType extends GameParams = GameParams> {
     private animationFrameId: number;
     private runningLoop = false;
 
-    // Debug
-    protected automationLabel: HTMLDivElement;
-
     // Performance
     readonly performanceRecorder = new PerformanceRecorder({
         'recordCount': Math.floor(window.innerWidth / 3),
@@ -56,12 +53,6 @@ export abstract class Game<ParamsType extends GameParams = GameParams> {
 
         window.addEventListener('blur', () => this.windowHasFocus(false), false);
         window.addEventListener('focus', () => this.windowHasFocus(true), false);
-
-        if (this.params.automation) {
-            this.automationLabel = document.createElement('div');
-            this.automationLabel.id = 'automation-label';
-            document.body.appendChild(this.automationLabel);
-        }
 
         this.inputs = new GameInputs(this);
         this.inputs.setup();
@@ -115,18 +106,6 @@ export abstract class Game<ParamsType extends GameParams = GameParams> {
         }
         this.performanceRecorder.onEnd('RENDER');
 
-        if (this.params.automation) {
-            const automation = {};
-            this.getAutomationValues(automation);
-            this.automationLabel.innerText = JSON.stringify(automation);
-
-            // Disable all CSS animations for automation
-            const styleElement = document.createElement('style');
-            styleElement.setAttribute('id','style-tag');
-            styleElement.innerHTML = '*,:after,:before,.animate-in{transition:none!important;animation:none!important;}';
-            document.head.appendChild(styleElement);
-        }
-
         this.performanceRecorder.onEnd('FRAME');
 
         if (this.runningLoop) {
@@ -158,10 +137,6 @@ export abstract class Game<ParamsType extends GameParams = GameParams> {
 
     getDebugValues(out: {[key: string]: any}) {
         this.screenStack.current()?.addDebugValues(out);
-    }
-
-    getAutomationValues(out: {[key: string]: any}) {
-        this.getDebugValues(out);
     }
 
     private parseURL() {

@@ -1,0 +1,17 @@
+{
+    "name": "@remvst/game-navigation-html",
+    "version": "1.0.0",
+    "description": "",
+    "main": "lib/index.js",
+    "scripts": {
+      "build": "rm -rf lib && tsc",
+      "prepublishOnly": "npm i && npm run build"
+    },
+    "author": "Rémi Vansteelandt",
+    "license": "UNLICENSED",
+    "dependencies": {
+    },
+    "devDependencies": {
+      "typescript": "^5.2.2"
+    }
+  }

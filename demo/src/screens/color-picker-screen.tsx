@@ -20,7 +20,7 @@ export class ColorPickerScreen extends ReactScreen {
             height: '100%',
             color: 'white',
         }}>
-            <h1>Menu</h1>
+            <h1>Pick a square color</h1>
             <button onClick={() => this.resolver.resolve(0xff0000)}>red square</button>
             <button onClick={() => this.resolver.resolve(0x0000ff)}>blue square</button>
         </div>);

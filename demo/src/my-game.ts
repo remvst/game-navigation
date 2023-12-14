@@ -1,8 +1,7 @@
-import { Game, AutomationGamePlugin, TimeKeysGamePlugin, BlurPausingGamePlugin, Screen, NavigationType } from "@remvst/game-navigation-core";
+import { Game, TimeKeysGamePlugin, BlurPausingGamePlugin, Screen } from "@remvst/game-navigation-core";
 import { HTMLGamePlugin } from "@remvst/game-navigation-html";
 import { PIXIGamePlugin } from "@remvst/game-navigation-pixi";
 import { SpinningSquareScreen } from "./screens/spinning-square-screen";
-import { ColorPickerScreen } from "./screens/color-picker-screen";
 
 export class MyGame extends Game {
     readonly plugins = [
@@ -18,10 +17,7 @@ export class MyGame extends Game {
 
         this.plugin(PIXIGamePlugin).setDebugVisible(true);
 
-        (async () => {
-            const color = await this.screenStack.resolvableScreen(new ColorPickerScreen(), NavigationType.PUSH);
-            this.screenStack.reset(new SpinningSquareScreen(color));
-        })();
+        this.screenStack.reset(new SpinningSquareScreen(0xffffff));
     }
 
     setupScreen(screen: Screen): void {

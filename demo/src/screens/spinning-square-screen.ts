@@ -31,6 +31,8 @@ export class SpinningSquareScreen extends PIXIScreen {
 
         this.square.position.set(this.game.params.width / 2, this.game.params.height / 2);
         this.view.addChild(this.square);
+
+        this.changeColor();
     }
 
     cycle(elapsed: number): void {

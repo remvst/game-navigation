@@ -1,7 +1,6 @@
 import { GameInputs } from '../interaction/inputs';
 import { GameParams } from './game-params';
 import { GamePlugin } from './game-plugin';
-import { Screen } from '../ui/screen';
 import { ScreenStack } from '../navigation/screen-stack';
 import { PerformanceRecorder } from '@remvst/client-performance';
 

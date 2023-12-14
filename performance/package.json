@@ -1,0 +1,19 @@
+{
+  "name": "@remvst/game-navigation-performance",
+  "version": "1.0.0",
+  "description": "",
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "rm -rf lib && tsc",
+    "prepublishOnly": "npm i && npm run build"
+  },
+  "author": "Rémi Vansteelandt",
+  "license": "UNLICENSED",
+  "peerDependencies": {
+    "@remvst/client-performance": "^1.0.0",
+    "@remvst/game-navigation-core": "file:../core"
+  },
+  "devDependencies": {
+    "typescript": "^5.2.2"
+  }
+}

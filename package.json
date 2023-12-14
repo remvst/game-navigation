@@ -8,16 +8,6 @@
   },
   "author": "Rémi Vansteelandt",
   "license": "UNLICENSED",
-  "dependencies": {
-    "@remvst/animate.js": "^2.0.0",
-    "@remvst/client-inputs": "^1.0.4",
-    "@remvst/client-performance": "^1.0.0",
-    "@remvst/game-navigation-core": "file:./core",
-    "@remvst/game-navigation-html": "file:./html",
-    "@remvst/game-navigation-pixi": "file:./pixi",
-    "@remvst/game-navigation-react": "file:./react",
-    "@remvst/optimization": "^1.0.1"
-  },
   "devDependencies": {
     "subpackage": "^1.1.0",
     "typescript": "^5.2.2"
@@ -25,6 +15,7 @@
   "subPackages": [
     "core",
     "html",
+    "performance",
     "pixi",
     "react"
   ]

@@ -1,0 +1,22 @@
+{
+  "name": "@remvst/game-navigation-sound",
+  "version": "1.0.0",
+  "description": "",
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "rm -rf lib && tsc",
+    "prepublishOnly": "npm i && npm run build"
+  },
+  "author": "Rémi Vansteelandt",
+  "license": "UNLICENSED",
+  "peerDependencies": {
+    "@remvst/game-navigation-core": "file:../core"
+  },
+  "dependencies": {
+    "@types/howler": "^2.2.7",
+    "howler": "^2.2.3"
+  },
+  "devDependencies": {
+    "typescript": "^5.2.2"
+  }
+}

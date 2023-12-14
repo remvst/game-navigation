@@ -8,14 +8,13 @@ export class BlurPausingGamePlugin extends GamePlugin {
     hasFocus = true;
 
     setup(): void {
+        super.setup();
+
         window.addEventListener('blur', () => this.windowHasFocus(false), false);
         window.addEventListener('focus', () => this.windowHasFocus(true), false);
     }
 
-    render(): void {
-    }
-
-    windowHasFocus(hasFocus: boolean) {
+    private windowHasFocus(hasFocus: boolean) {
         this.hasFocus = hasFocus;
         if (hasFocus) {
             this.game.scheduleFrame();

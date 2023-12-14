@@ -12,6 +12,10 @@
     "@remvst/animate.js": "^2.0.0",
     "@remvst/client-inputs": "^1.0.4",
     "@remvst/client-performance": "^1.0.0",
+    "@remvst/game-navigation-core": "file:./core",
+    "@remvst/game-navigation-html": "file:./html",
+    "@remvst/game-navigation-pixi": "file:./pixi",
+    "@remvst/game-navigation-react": "file:./react",
     "@remvst/optimization": "^1.0.1"
   },
   "devDependencies": {

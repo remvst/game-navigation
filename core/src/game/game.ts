@@ -114,6 +114,11 @@ export abstract class Game<ParamsType extends GameParams = GameParams> {
             adjusted *= plugin.timeFactor;
         }
 
+        const screen = this.screenStack.current();
+        if (screen) {
+            adjusted *= this.screenStack.current().timeFactor;
+        }
+
         this.age += elapsed;
 
         const screens = this.screenStack.screens.slice();
@@ -125,6 +130,10 @@ export abstract class Game<ParamsType extends GameParams = GameParams> {
             if (screen.absorbCycle) {
                 break;
             }
+        }
+
+        for (const plugin of this.plugins) {
+            plugin.cycle(elapsed);
         }
     }
 

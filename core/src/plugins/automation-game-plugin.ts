@@ -17,12 +17,16 @@ export class AutomationGamePlugin extends GamePlugin {
     }
 
     setup(): void {
+        super.setup();
+
         this.automationLabel = document.createElement('div');
         this.automationLabel.id = 'automation-label';
         document.body.appendChild(this.automationLabel);
     }
 
     render(): void {
+        super.render();
+
         const automation = {};
         this.getAutomationValues(automation);
         this.automationLabel.innerText = JSON.stringify(automation);

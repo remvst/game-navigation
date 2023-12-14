@@ -37,6 +37,8 @@ export class PIXIGamePlugin extends GamePlugin {
     }
 
     setup(): void {
+        super.setup();
+
         this.debugger.position.set(5, this.game.params.height - 5);
         this.stage.addChild(this.screenContainer, this.debugger);
 
@@ -44,6 +46,8 @@ export class PIXIGamePlugin extends GamePlugin {
     }
 
     render(): void {
+        super.render();
+
         this.renderer.render(this.stage);
 
         if (this.debugger.visible) {

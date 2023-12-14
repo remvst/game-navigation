@@ -10,11 +10,4 @@ export class HTMLGamePlugin extends GamePlugin {
     ) {
         super();
     }
-
-    setup(): void {
-    }
-
-    render(): void {
-        // no-op
-    }
 }

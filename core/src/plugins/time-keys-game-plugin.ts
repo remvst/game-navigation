@@ -15,10 +15,4 @@ export class TimeKeysGamePlugin extends GamePlugin {
 
         return 1;
     }
-
-    setup(): void {
-    }
-
-    render(): void {
-    }
 }

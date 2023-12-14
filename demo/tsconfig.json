@@ -4,7 +4,8 @@
         "module": "commonjs",
         "esModuleInterop": true,
         "allowJs": false,
-        "strict": true,
+        "jsx": "react",
+        "strict": false,
         "skipLibCheck": true
     },
     "include": ["src/**/*"],

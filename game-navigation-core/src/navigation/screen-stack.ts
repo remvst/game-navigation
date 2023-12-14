@@ -88,7 +88,7 @@ export class ScreenStack {
 
     resolvableScreen<T>(
         screen: Screen & ResolverHolder<T>,
-        navigationType: NavigationType,
+        navigationType: NavigationType = NavigationType.PUSH,
         dismissWhenResolved: boolean = true,
     ): Promise<T> {
         return new Promise((resolve, reject) => {

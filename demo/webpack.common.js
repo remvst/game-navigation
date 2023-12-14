@@ -22,7 +22,7 @@ module.exports = {
         assetModuleFilename: '[name]-[hash][ext][query]',
     },
     resolve: {
-        extensions: ['*', '.js', '.ts'],
+        extensions: ['*', '.js', '.ts', '.tsx'],
         alias: {
             'pixi.js': path.resolve('./node_modules/pixi.js'),
             '@remvst/game-navigation-core': path.resolve('./node_modules/@remvst/game-navigation-core'),
@@ -33,7 +33,7 @@ module.exports = {
     },
     module: {
         rules: [{
-            test: /\.ts$/,
+            test: /\.tsx?$/,
             use: 'ts-loader',
             exclude: /node_modules/,
         }],

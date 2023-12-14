@@ -88,7 +88,8 @@ export abstract class Game<ParamsType extends GameParams = GameParams> {
         this.performanceRecorder.onStart('FRAME');
 
         const now = window.performance.now();
-        const elapsed = (now - this.lastFrame) / 1000;
+        const elapsedMs = now - this.lastFrame;
+        const elapsed = Math.min(this.params.maxFrameInterval || 1, elapsedMs / 1000);
 
         this.lastFrame = now;
 

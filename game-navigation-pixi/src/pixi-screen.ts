@@ -2,7 +2,7 @@ import { Container, DisplayObject } from 'pixi.js';
 import { PIXIGamePlugin } from './pixi-game-plugin';
 import { Screen } from '@remvst/game-navigation-core';
 
-export default abstract class PIXIScreen extends Screen {
+export abstract class PIXIScreen extends Screen {
     view: Container;
 
     setup() {

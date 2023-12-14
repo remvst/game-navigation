@@ -9,7 +9,11 @@ export class AutomationGamePlugin extends GamePlugin {
     protected automationLabel: HTMLDivElement;
 
     get timeFactor(): number {
-        return 5;
+        return this.automationTimeFactor;
+    }
+
+    constructor(private readonly automationTimeFactor = 5) {
+        super();
     }
 
     setup(): void {

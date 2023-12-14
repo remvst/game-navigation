@@ -33,7 +33,7 @@ export abstract class Screen {
         }
     }
 
-    abstract getId(): string;
+    abstract get id(): string;
 
     setup() {
         this.inputs = new ScreenInputs(this);
@@ -142,7 +142,7 @@ export abstract class Screen {
     }
 
     addDebugValues(values: {[key: string]: any}) {
-        values['screen.id'] = this.getId();
+        values['screen.id'] = this.id;
         values['interpolations'] = this.interpolationPool.size;
     }
 

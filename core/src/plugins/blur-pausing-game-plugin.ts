@@ -5,18 +5,15 @@ export class BlurPausingGamePlugin extends GamePlugin {
     static readonly key = 'blur-pausing-game';
     readonly key = BlurPausingGamePlugin.key;
 
-    hasFocus = true;
-
     setup(): void {
         super.setup();
 
-        window.addEventListener('blur', () => this.windowHasFocus(false), false);
-        window.addEventListener('focus', () => this.windowHasFocus(true), false);
+        window.addEventListener('blur', () => this.focusChanged(), false);
+        window.addEventListener('focus', () => this.focusChanged(), false);
     }
 
-    private windowHasFocus(hasFocus: boolean) {
-        this.hasFocus = hasFocus;
-        if (hasFocus) {
+    private focusChanged() {
+        if (document.hasFocus()) {
             this.game.scheduleFrame();
         } else {
             this.game.stopLoop();

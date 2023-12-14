@@ -39,7 +39,7 @@ export class SpinningSquareScreen extends PIXIScreen {
         super.cycle(elapsed);
         this.square.rotation += elapsed * Math.PI;
 
-        if (isDown(this.game.inputs, this.keyBindingSettings.binding('back'))) {
+        if (this.isForeground && isDown(this.game.inputs, this.keyBindingSettings.binding('back'))) {
             this.changeColor();
         }
     }

@@ -1,4 +1,4 @@
-import { Game, TimeKeysGamePlugin, BlurPausingGamePlugin, Screen } from "@remvst/game-navigation-core";
+import { Game, TimeKeysGamePlugin, BlurPausingGamePlugin } from "@remvst/game-navigation-core";
 import { HTMLGamePlugin } from "@remvst/game-navigation-html";
 import { PIXIGamePlugin } from "@remvst/game-navigation-pixi";
 import { SpinningSquareScreen } from "./screens/spinning-square-screen";

@@ -2,18 +2,26 @@
   "name": "@remvst/game-navigation",
   "version": "1.0.0",
   "description": "",
-  "main": "lib/index.js",
   "scripts": {
-    "build:demo": "cd demo && npm run build",
-    "build:core": "cd game-navigation-core && npm run build",
-    "build:html": "cd game-navigation-html && npm run build",
-    "build:react": "cd game-navigation-react && npm run build",
-    "build:pixi": "cd game-navigation-pixi && npm run build",
-    "build": "npm run build:core && npm run build:html && npm run build:react && npm run build:pixi",
-    "postinstall": "scripts/fullinstall.sh"
+    "postinstall": "subpkg install",
+    "build": "subpkg run build"
   },
   "author": "Rémi Vansteelandt",
   "license": "UNLICENSED",
-  "dependencies": {},
-  "devDependencies": {}
+  "dependencies": {
+    "@remvst/animate.js": "^2.0.0",
+    "@remvst/client-inputs": "^1.0.4",
+    "@remvst/client-performance": "^1.0.0",
+    "@remvst/optimization": "^1.0.1"
+  },
+  "devDependencies": {
+    "subpackage": "^1.1.0",
+    "typescript": "^5.2.2"
+  },
+  "subPackages": [
+    "core",
+    "html",
+    "pixi",
+    "react"
+  ]
 }

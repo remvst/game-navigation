@@ -1,5 +1,5 @@
 {
-    "name": "@remvst/client-inputs-demo",
+    "name": "@remvst/game-navigation-demo",
     "version": "1.0.0",
     "description": "",
     "main": "index.js",
@@ -30,9 +30,9 @@
         "typescript": "^5.2.2"
     },
     "peerDependencies": {
-        "@remvst/game-navigation-core": "file:../game-navigation-core",
-        "@remvst/game-navigation-html": "file:../game-navigation-html",
-        "@remvst/game-navigation-pixi": "file:../game-navigation-pixi",
-        "@remvst/game-navigation-react": "file:../game-navigation-react"
+        "@remvst/game-navigation-core": "file:../core",
+        "@remvst/game-navigation-html": "file:../html",
+        "@remvst/game-navigation-pixi": "file:../pixi",
+        "@remvst/game-navigation-react": "file:../react"
     }
 }

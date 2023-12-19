@@ -74,8 +74,6 @@ export class PIXIGamePlugin extends GamePlugin {
                 'height': canvasHeight,
                 'resolution': 1,
                 'antialias': true,
-                'backgroundAlpha': 1,
-                'clearBeforeRender': false,
             });
 
             this.renderer.options.antialias = true;

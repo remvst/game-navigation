@@ -1,6 +1,6 @@
 {
     "name": "@remvst/game-navigation-pixi",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "",
     "main": "lib/index.js",
     "scripts": {

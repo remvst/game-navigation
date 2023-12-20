@@ -1,4 +1,4 @@
-import { Game, TimeKeysGamePlugin, BlurPausingGamePlugin } from "@remvst/game-navigation-core";
+import { Game, TimeKeysGamePlugin, BlurPausingGamePlugin, VersionLabelGamePlugin } from "@remvst/game-navigation-core";
 import { HTMLGamePlugin } from "@remvst/game-navigation-html";
 import { PIXIGamePlugin } from "@remvst/game-navigation-pixi";
 import { SpinningSquareScreen } from "./screens/spinning-square-screen";
@@ -12,6 +12,7 @@ export class MyGame extends Game {
         new TimeKeysGamePlugin(),
         new BlurPausingGamePlugin(),
         new FullscreenButtonGamePlugin(document.querySelector('#game-container')),
+        new VersionLabelGamePlugin(document.querySelector('#game-container'), 'VERSION ONE - EARLY ACCESS', 'color: red;'),
     ];
 
     setup(): void {

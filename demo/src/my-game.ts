@@ -2,6 +2,7 @@ import { Game, TimeKeysGamePlugin, BlurPausingGamePlugin } from "@remvst/game-na
 import { HTMLGamePlugin } from "@remvst/game-navigation-html";
 import { PIXIGamePlugin } from "@remvst/game-navigation-pixi";
 import { SpinningSquareScreen } from "./screens/spinning-square-screen";
+import { FullscreenButtonGamePlugin } from "@remvst/game-navigation-core";
 
 export class MyGame extends Game {
     readonly plugins = [
@@ -10,6 +11,7 @@ export class MyGame extends Game {
         // new AutomationGamePlugin(1),
         new TimeKeysGamePlugin(),
         new BlurPausingGamePlugin(),
+        new FullscreenButtonGamePlugin(document.querySelector('#game-container')),
     ];
 
     setup(): void {

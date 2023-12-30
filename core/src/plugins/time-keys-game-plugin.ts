@@ -6,11 +6,24 @@ export class TimeKeysGamePlugin extends GamePlugin {
     static readonly key = 'time-keys';
     readonly key = TimeKeysGamePlugin.key;
 
+    speedUpFactor: number;
+    slowDownFactor: number;
+
+    constructor(options: {
+        speedUpFactor?: number,
+        slowDownFactor?: number,
+    } = {}) {
+        super();
+
+        this.speedUpFactor = options.speedUpFactor || 10;
+        this.slowDownFactor = options.slowDownFactor || 0.25;
+    }
+
     get timeFactor(): number {
         if (this.game.inputs.keyboard.isDown(Keyboard.F)) {
-            return 500;
+            return this.speedUpFactor;
         } else if (this.game.inputs.keyboard.isDown(Keyboard.G)) {
-            return 0.1;
+            return this.slowDownFactor;
         }
 
         return 1;

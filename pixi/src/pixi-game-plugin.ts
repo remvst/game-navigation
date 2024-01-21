@@ -6,17 +6,17 @@ export class PIXIGamePlugin extends GamePlugin {
     static readonly key = 'pixi';
     readonly key = PIXIGamePlugin.key;
 
-    private canvas: HTMLCanvasElement;
+    readonly canvas: HTMLCanvasElement;
 
     // Scene
-    stage = new Container();
-    screenContainer = new Container();
+    readonly stage = new Container();
+    readonly screenContainer = new Container();
 
     // Rendering
     renderer: IRenderer<HTMLCanvasElement>;
 
     // Debugging
-    protected debugger = (() => {
+    readonly debugger = (() => {
         const view = new Text('', {
             'fill': 'white',
             'align': 'left',

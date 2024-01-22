@@ -5,7 +5,7 @@ export class BlurPausingGamePlugin extends GamePlugin {
     static readonly key = 'blur-pausing-game';
     readonly key = BlurPausingGamePlugin.key;
 
-    private _enabled = false;
+    private _enabled = true;
 
     get enabled() {
         return this._enabled;

@@ -6,7 +6,7 @@ export class PIXIGamePlugin extends GamePlugin {
     static readonly key = 'pixi';
     readonly key = PIXIGamePlugin.key;
 
-    readonly canvas: HTMLCanvasElement;
+    private canvas: HTMLCanvasElement;
 
     // Scene
     readonly stage = new Container();
@@ -14,6 +14,7 @@ export class PIXIGamePlugin extends GamePlugin {
 
     // Rendering
     renderer: IRenderer<HTMLCanvasElement>;
+    private needsRerender = true;
 
     // Debugging
     readonly debugger = (() => {
@@ -45,8 +46,14 @@ export class PIXIGamePlugin extends GamePlugin {
         this.setResolution(this.resolution);
     }
 
+    setNeedsRerender() {
+        this.needsRerender = true;
+    }
+
     render(): void {
         super.render();
+
+        if (!this.needsRerender) return;
 
         this.renderer.render(this.stage);
 

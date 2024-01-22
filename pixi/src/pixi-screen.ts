@@ -22,6 +22,11 @@ export abstract class PIXIScreen extends Screen {
         values['Views'] = treeSize(this.view);
         values['Render calls'] = renderSize(this.view);
     }
+
+    cycle(elapsed: number): void {
+        super.cycle(elapsed);
+        this.game.plugin(PIXIGamePlugin).setNeedsRerender();
+    }
 }
 
 function treeSize(tree: DisplayObject): number {

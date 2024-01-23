@@ -164,4 +164,22 @@ export abstract class Screen {
     get timeFactor() {
         return 1;
     }
+
+    get isCycling() {
+        for (let i = this.game.screenStack.screens.length - 1 ; i >= 0 ; i--) {
+            const screen = this.game.screenStack.screens[i];
+            if (screen === this) return true;
+            if (screen.absorbCycle) return false;
+        }
+        return false;
+    }
+
+    get isTakingInputs() {
+        for (let i = this.game.screenStack.screens.length - 1 ; i >= 0 ; i--) {
+            const screen = this.game.screenStack.screens[i];
+            if (screen === this) return true;
+            if (screen.absorbInputs) return false;
+        }
+        return false;
+    }
 }

@@ -18,4 +18,14 @@ export abstract class HTMLScreen extends Screen {
         this.view.parentNode?.removeChild(this.view);
         super.destroy();
     }
+
+    foreground(): void {
+        super.foreground();
+        this.view.style.display = 'block';
+    }
+
+    background(): void {
+        super.background();
+        this.view.style.display = 'none';
+    }
 }

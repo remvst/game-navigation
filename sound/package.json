@@ -1,6 +1,6 @@
 {
   "name": "@remvst/game-navigation-sound",
-  "version": "1.0.2",
+  "version": "1.4.0",
   "description": "",
   "main": "lib/index.js",
   "scripts": {
@@ -10,7 +10,7 @@
   "author": "Rémi Vansteelandt",
   "license": "UNLICENSED",
   "peerDependencies": {
-    "@remvst/game-navigation-core": "^1.0.1"
+    "@remvst/game-navigation-core": "^1.4.0"
   },
   "dependencies": {
     "@types/howler": "^2.2.7",

@@ -23,7 +23,7 @@ export class PerformanceGamePlugin extends GamePlugin {
             {'color': '#08f', 'renderer': renderExecutionTime('GAME_LOOP')},
             {'color': '#ff0', 'renderer': renderExecutionTime('RENDER')},
             {'color': '#00f', 'renderer': renderExecutionTime('UPDATE_VIEWS')},
-        ], window.innerWidth / this.game.performanceRecorder.frames.length);
+        ], Math.max(2, window.innerWidth / this.game.performanceRecorder.frames.length));
 
         this.performanceRendererContainer.appendChild(this.performanceRenderer.view);
     }

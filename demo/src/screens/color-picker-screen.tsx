@@ -1,6 +1,6 @@
 import { Resolver, UserCancelledError } from "@remvst/game-navigation-core";
 import { ReactScreen } from "@remvst/game-navigation-react";
-import React, { ReactElement, JSXElementConstructor } from "react";
+import React from "react";
 
 export class ColorPickerScreen extends ReactScreen {
 
@@ -10,7 +10,7 @@ export class ColorPickerScreen extends ReactScreen {
         return 'color-picker';
     }
 
-    async rootComponent(): Promise<ReactElement<any, string | JSXElementConstructor<any>>> {
+    async rootComponent(): Promise<React.ReactElement> {
         return (<div style={{
             display: 'flex',
             flexDirection: 'column',

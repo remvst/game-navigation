@@ -69,12 +69,10 @@ export class SpinningSquareScreen extends PIXIScreen {
         this.instruction.visible = this.isTakingInputs;
     }
 
-    private async changeColor() {
-
-        const color = await navigationFlow((async () => {
-            return await this.game.screenStack.resolvableScreen(new ColorPickerScreen());
+    private changeColor() {
+        navigationFlow((async () => {
+            this.square.tint = await this.game.screenStack.resolvableScreen(new ColorPickerScreen());
         })())
-        this.square.tint = color;
     }
 
     mouseMove(x: number, y: number, movementX: number, movementY: number): void {

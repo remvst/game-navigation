@@ -1,14 +1,8 @@
 import { UserCancelledError } from "../navigation/resolver";
 
-export async function navigationFlow<T>(flow: Promise<T>): Promise<T> {
-    return new Promise(async (resolve, reject) => {
-        try {
-            resolve(await flow);
-        } catch (err) {
-            if (err instanceof UserCancelledError) {
-                return;
-            }
-            reject(err);
-        }
+export function navigationFlow<T>(flow: Promise<T>) {
+    flow.catch(err => {
+        if (err instanceof UserCancelledError) return;
+        console.error(err);
     });
 }

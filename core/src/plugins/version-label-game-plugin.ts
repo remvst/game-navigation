@@ -8,7 +8,7 @@ export class VersionLabelGamePlugin extends GamePlugin {
         const label = document.createElement("div");
         label.className = "version-label";
         label.innerText = this.label;
-        return this.labelElement;
+        return label;
     })();
 
     readonly styleElement = (() => {

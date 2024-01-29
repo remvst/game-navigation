@@ -6,13 +6,13 @@ export class VersionLabelGamePlugin extends GamePlugin {
 
     readonly labelElement = (() => {
         const label = document.createElement("div");
-        label.className = 'version-label';
+        label.className = "version-label";
         label.innerText = this.label;
         return this.labelElement;
     })();
 
     readonly styleElement = (() => {
-        const styleElt = document.createElement('style');
+        const styleElt = document.createElement("style");
         styleElt.innerHTML = `
             .version-label {
                 position: absolute;

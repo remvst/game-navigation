@@ -1,11 +1,10 @@
-import { GameInputs } from '../interaction/inputs';
-import { GameParams } from './game-params';
-import { GamePlugin } from './game-plugin';
-import { ScreenStack } from '../navigation/screen-stack';
-import { PerformanceRecorder } from '@remvst/client-performance';
+import { PerformanceRecorder } from "@remvst/client-performance";
+import { GameInputs } from "../interaction/inputs";
+import { ScreenStack } from "../navigation/screen-stack";
+import { GameParams } from "./game-params";
+import { GamePlugin } from "./game-plugin";
 
 export abstract class Game<ParamsType extends GameParams = GameParams> {
-
     private readonly pluginMap = new Map<string, GamePlugin>();
 
     // Inputs
@@ -24,7 +23,7 @@ export abstract class Game<ParamsType extends GameParams = GameParams> {
 
     // Performance
     readonly performanceRecorder = new PerformanceRecorder({
-        'recordCount': Math.floor(window.innerWidth / 3),
+        recordCount: Math.floor(window.innerWidth / 3),
     });
 
     constructor(readonly params: ParamsType) {
@@ -35,7 +34,9 @@ export abstract class Game<ParamsType extends GameParams = GameParams> {
 
     abstract get container(): HTMLElement;
 
-    plugin<T extends GamePlugin>(keyProvider: (new (...params: any) => T) & {key: string}): T {
+    plugin<T extends GamePlugin>(
+        keyProvider: (new (...params: any) => T) & { key: string },
+    ): T {
         return this.pluginMap.get(keyProvider.key) as T;
     }
 
@@ -82,23 +83,26 @@ export abstract class Game<ParamsType extends GameParams = GameParams> {
 
     frame() {
         this.performanceRecorder.roll();
-        this.performanceRecorder.onStart('FRAME');
+        this.performanceRecorder.onStart("FRAME");
 
         const now = window.performance.now();
         const elapsedMs = now - this.lastFrame;
-        const elapsed = Math.min(this.params.maxFrameInterval || 1, elapsedMs / 1000);
+        const elapsed = Math.min(
+            this.params.maxFrameInterval || 1,
+            elapsedMs / 1000,
+        );
 
         this.lastFrame = now;
 
         this.cycle(elapsed);
 
-        this.performanceRecorder.onStart('RENDER');
+        this.performanceRecorder.onStart("RENDER");
         for (const plugin of this.plugins) {
             plugin.render();
         }
-        this.performanceRecorder.onEnd('RENDER');
+        this.performanceRecorder.onEnd("RENDER");
 
-        this.performanceRecorder.onEnd('FRAME');
+        this.performanceRecorder.onEnd("FRAME");
 
         if (this.runningLoop) {
             this.scheduleFrame();
@@ -136,15 +140,17 @@ export abstract class Game<ParamsType extends GameParams = GameParams> {
         }
     }
 
-    getDebugValues(out: {[key: string]: any}) {
+    getDebugValues(out: { [key: string]: any }) {
         this.screenStack.current()?.addDebugValues(out);
     }
 
     private parseURL() {
-        const params = new URLSearchParams((document.location.search || '?').substr(1));
+        const params = new URLSearchParams(
+            (document.location.search || "?").substr(1),
+        );
         for (const [param, originalValue] of params.entries()) {
             let value = originalValue as any;
-            if (value === 'true' || value === 'false') {
+            if (value === "true" || value === "false") {
                 value = JSON.parse(value);
             } else if (!Number.isNaN(value)) {
                 value = parseFloat(value) || value;
@@ -158,4 +164,4 @@ export abstract class Game<ParamsType extends GameParams = GameParams> {
         (window as any).S = this.screenStack.current();
         this.container.style.cursor = this.screenStack.current()?.cursorType;
     }
-};
+}

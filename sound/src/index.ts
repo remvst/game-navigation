@@ -1,2 +1,2 @@
-export * from './sound-game-plugin';
-export * from './soundtrack-manager';
+export * from "./sound-game-plugin";
+export * from "./soundtrack-manager";

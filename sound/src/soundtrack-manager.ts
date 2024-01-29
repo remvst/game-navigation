@@ -3,7 +3,6 @@ import { Howl } from "howler";
 export type SongMapping = Map<string, Howl[]>;
 
 export class SoundtrackManager {
-
     volume = 1;
     contextVolume = 1;
     currentHowl: Howl | null = null;
@@ -11,9 +10,7 @@ export class SoundtrackManager {
     currentSoundIndex = Math.floor(Math.random() * 3);
     currentType: string = null;
 
-    constructor(private readonly songMapping: SongMapping) {
-
-    }
+    constructor(private readonly songMapping: SongMapping) {}
 
     setVolume(volume: number) {
         this.volume = volume;
@@ -47,7 +44,7 @@ export class SoundtrackManager {
     next() {
         const { currentHowl, currentHowlId } = this;
         if (currentHowl && currentHowlId) {
-            currentHowl.once('fade', () => currentHowl.stop(currentHowlId));
+            currentHowl.once("fade", () => currentHowl.stop(currentHowlId));
             currentHowl.fade(this.howlVolume, 0, 1000, currentHowlId);
         }
 
@@ -64,7 +61,7 @@ export class SoundtrackManager {
         howl.volume(this.howlVolume);
 
         const howlId = howl.play();
-        howl.once('end', () => {
+        howl.once("end", () => {
             this.currentHowl?.stop(this.currentHowlId);
             this.next();
         });
@@ -72,11 +69,15 @@ export class SoundtrackManager {
         this.currentHowl = howl;
         this.currentHowlId = howlId;
 
-        this.currentHowl.once('play', () => {
-            if (this.currentType !== currentType) {
-                howl.stop(howlId);
-            }
-        }, howlId);
+        this.currentHowl.once(
+            "play",
+            () => {
+                if (this.currentType !== currentType) {
+                    howl.stop(howlId);
+                }
+            },
+            howlId,
+        );
     }
 
     fadeIn() {

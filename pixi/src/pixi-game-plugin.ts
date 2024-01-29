@@ -1,9 +1,8 @@
-import { IRenderer, Container, Text, autoDetectRenderer } from 'pixi.js';
 import { GamePlugin } from "@remvst/game-navigation-core";
+import { Container, IRenderer, Text, autoDetectRenderer } from "pixi.js";
 
 export class PIXIGamePlugin extends GamePlugin {
-
-    static readonly key = 'pixi';
+    static readonly key = "pixi";
     readonly key = PIXIGamePlugin.key;
 
     private canvas: HTMLCanvasElement;
@@ -18,11 +17,11 @@ export class PIXIGamePlugin extends GamePlugin {
 
     // Debugging
     readonly debugger = (() => {
-        const view = new Text('', {
-            'fill': 'white',
-            'align': 'left',
-            'fontFamily': 'Courier',
-            'fontSize': '22px',
+        const view = new Text("", {
+            fill: "white",
+            align: "left",
+            fontFamily: "Courier",
+            fontSize: "22px",
         });
         view.anchor.set(0, 1);
         view.resolution = 4;
@@ -60,7 +59,9 @@ export class PIXIGamePlugin extends GamePlugin {
         if (this.debugger.visible) {
             const debug = {};
             this.game.getDebugValues(debug);
-            this.debugger.text = Object.keys(debug).map((key) => `${key}: ${(debug as any)[key]}`).join('\n');
+            this.debugger.text = Object.keys(debug)
+                .map((key) => `${key}: ${(debug as any)[key]}`)
+                .join("\n");
         }
     }
 
@@ -77,10 +78,10 @@ export class PIXIGamePlugin extends GamePlugin {
         if (!this.renderer) {
             // PIXI renderer
             this.renderer = autoDetectRenderer<HTMLCanvasElement>({
-                'width': canvasWidth,
-                'height': canvasHeight,
-                'resolution': 1,
-                'antialias': true,
+                width: canvasWidth,
+                height: canvasHeight,
+                resolution: 1,
+                antialias: true,
             });
 
             this.renderer.options.antialias = true;
@@ -94,8 +95,11 @@ export class PIXIGamePlugin extends GamePlugin {
         this.stage.scale.x = resolution;
         this.stage.scale.y = resolution;
 
-        const cssRoot = document.querySelector(':root') as HTMLElement;
-        cssRoot.style.setProperty('--aspect-ratio', `${canvasWidth} / ${canvasHeight}`);
+        const cssRoot = document.querySelector(":root") as HTMLElement;
+        cssRoot.style.setProperty(
+            "--aspect-ratio",
+            `${canvasWidth} / ${canvasHeight}`,
+        );
     }
 
     setDebugVisible(visible: boolean) {

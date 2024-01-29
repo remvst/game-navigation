@@ -1,2 +1,2 @@
-export * from './html-game-plugin';
-export * from './html-screen';
+export * from "./html-game-plugin";
+export * from "./html-screen";

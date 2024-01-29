@@ -1,6 +1,6 @@
-import { Container, DisplayObject } from 'pixi.js';
-import { PIXIGamePlugin } from './pixi-game-plugin';
-import { Screen } from '@remvst/game-navigation-core';
+import { Screen } from "@remvst/game-navigation-core";
+import { Container, DisplayObject } from "pixi.js";
+import { PIXIGamePlugin } from "./pixi-game-plugin";
 
 export abstract class PIXIScreen extends Screen {
     view: Container;
@@ -17,10 +17,10 @@ export abstract class PIXIScreen extends Screen {
         this.view.parent?.removeChild(this.view);
     }
 
-    addDebugValues(values: { [key: string]: any; }): void {
+    addDebugValues(values: { [key: string]: any }): void {
         super.addDebugValues(values);
-        values['Views'] = treeSize(this.view);
-        values['Render calls'] = renderSize(this.view);
+        values["Views"] = treeSize(this.view);
+        values["Render calls"] = renderSize(this.view);
     }
 
     cycle(elapsed: number): void {
@@ -31,7 +31,7 @@ export abstract class PIXIScreen extends Screen {
 
 function treeSize(tree: DisplayObject): number {
     if (tree instanceof Container) {
-        return tree.children.reduce((acc, child) =>{
+        return tree.children.reduce((acc, child) => {
             return acc + treeSize(child);
         }, 1);
     } else {
@@ -49,7 +49,7 @@ function renderSize(tree: DisplayObject): number {
     }
 
     if (tree instanceof Container) {
-        return tree.children.reduce((acc, child) =>{
+        return tree.children.reduce((acc, child) => {
             return acc + renderSize(child);
         }, 1);
     } else {

@@ -1,6 +1,5 @@
 export class InMemoryStorage implements Storage {
-
-    private readonly items = new Map<string, string>;
+    private readonly items = new Map<string, string>();
 
     get length(): number {
         return this.items.size;
@@ -25,5 +24,4 @@ export class InMemoryStorage implements Storage {
     setItem(key: string, value: string): void {
         this.items.set(key, value);
     }
-
 }

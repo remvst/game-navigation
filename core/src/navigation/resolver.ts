@@ -1,11 +1,8 @@
-import { Screen } from '../ui/screen';
+import { Screen } from "../ui/screen";
 
-export class UserCancelledError extends Error {
-
-}
+export class UserCancelledError extends Error {}
 
 export class Resolver<T> {
-
     private readonly screen: Screen;
     readonly resolve: (value: T) => void;
     readonly reject: (error: Error) => void;
@@ -16,7 +13,7 @@ export class Resolver<T> {
     constructor(
         screen: Screen,
         resolve: (value: T) => void,
-        reject: (error: Error) => void
+        reject: (error: Error) => void,
     ) {
         this.screen = screen;
         this.resolve = (value) => {

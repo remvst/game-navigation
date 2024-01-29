@@ -1,27 +1,28 @@
 {
-  "name": "@remvst/game-navigation",
-  "version": "1.0.2",
-  "description": "",
-  "scripts": {
-    "prettier:fix": "prettier . --write",
-    "prettier:check": "prettier . --check",
-    "postinstall": "subpkg install",
-    "build": "subpkg run build"
-  },
-  "author": "Rémi Vansteelandt",
-  "license": "UNLICENSED",
-  "devDependencies": {
-    "prettier": "3.1.1",
-    "prettier-plugin-organize-imports": "^3.2.4",
-    "subpackage": "^1.1.0",
-    "typescript": "^5.2.2"
-  },
-  "subPackages": [
-    "core",
-    "html",
-    "performance",
-    "pixi",
-    "react",
-    "sound"
-  ]
+    "name": "@remvst/game-navigation",
+    "version": "1.0.2",
+    "description": "",
+    "scripts": {
+        "prettier:fix": "prettier . --write",
+        "prettier:check": "prettier . --check",
+        "postinstall": "subpkg install",
+        "build": "subpkg run build",
+        "test": "npm run prettier:check"
+    },
+    "author": "Rémi Vansteelandt",
+    "license": "UNLICENSED",
+    "devDependencies": {
+        "prettier": "3.1.1",
+        "prettier-plugin-organize-imports": "^3.2.4",
+        "subpackage": "^1.1.0",
+        "typescript": "^5.2.2"
+    },
+    "subPackages": [
+        "core",
+        "html",
+        "performance",
+        "pixi",
+        "react",
+        "sound"
+    ]
 }

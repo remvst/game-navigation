@@ -5,6 +5,6 @@
     "plugins": ["@typescript-eslint"],
     "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
     "rules": {
-      "@typescript-eslint/no-floating-promises": ["error"]
+        "@typescript-eslint/no-floating-promises": ["error"]
     }
-  }
+}

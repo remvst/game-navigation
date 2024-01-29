@@ -3,4 +3,4 @@ export interface GameParams {
     height: number;
     maxFrameInterval?: number;
     fps?: number;
-};
+}

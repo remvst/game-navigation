@@ -1,5 +1,5 @@
-import { Screen } from '@remvst/game-navigation-core';
-import { HTMLGamePlugin } from './html-game-plugin';
+import { Screen } from "@remvst/game-navigation-core";
+import { HTMLGamePlugin } from "./html-game-plugin";
 
 export abstract class HTMLScreen extends Screen {
     view: HTMLDivElement;
@@ -7,9 +7,9 @@ export abstract class HTMLScreen extends Screen {
     setup() {
         super.setup();
 
-        this.view = document.createElement('div');
-        this.view.style.width = '100%';
-        this.view.style.height = '100%';
+        this.view = document.createElement("div");
+        this.view.style.width = "100%";
+        this.view.style.height = "100%";
 
         this.game.plugin(HTMLGamePlugin).htmlContainer.appendChild(this.view);
     }
@@ -21,11 +21,11 @@ export abstract class HTMLScreen extends Screen {
 
     foreground(): void {
         super.foreground();
-        this.view.style.display = 'block';
+        this.view.style.display = "block";
     }
 
     background(): void {
         super.background();
-        this.view.style.display = 'none';
+        this.view.style.display = "none";
     }
 }

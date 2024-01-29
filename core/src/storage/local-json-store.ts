@@ -2,9 +2,7 @@ export class StoredItem<T> {
     constructor(
         private readonly localJsonStore: LocalJsonStore,
         readonly key: string,
-    ) {
-
-    }
+    ) {}
 
     get(): Promise<T | null> {
         return this.localJsonStore.getItem(this.key);
@@ -20,10 +18,7 @@ export class StoredItem<T> {
 }
 
 export class LocalJsonStore {
-    constructor(
-        private readonly localStorage: Storage,
-    ) {
-    }
+    constructor(private readonly localStorage: Storage) {}
 
     item<T>(key: string): StoredItem<T> {
         return new StoredItem(this, key);
@@ -33,16 +28,16 @@ export class LocalJsonStore {
         try {
             this.localStorage.setItem(key, JSON.stringify(value));
         } catch (err) {
-            console.error(`setItem error: ${err.message}`, err)
+            console.error(`setItem error: ${err.message}`, err);
             throw err;
         }
     }
 
     async deleteItem(key: string): Promise<void> {
         try {
-           this.localStorage.removeItem(key);
+            this.localStorage.removeItem(key);
         } catch (err) {
-            console.error(`deleteItem error: ${err.message}`, err)
+            console.error(`deleteItem error: ${err.message}`, err);
             throw err;
         }
     }
@@ -53,8 +48,11 @@ export class LocalJsonStore {
             if (!stored) return null;
             return JSON.parse(stored);
         } catch (err) {
-            console.error(`getItem error: ${err.message}. Falling back to null`, err)
+            console.error(
+                `getItem error: ${err.message}. Falling back to null`,
+                err,
+            );
             return null;
         }
     }
-};
+}

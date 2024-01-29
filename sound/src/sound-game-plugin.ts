@@ -2,8 +2,7 @@ import { GamePlugin } from "@remvst/game-navigation-core";
 import { SongMapping, SoundtrackManager } from "./soundtrack-manager";
 
 export class SoundGamePlugin extends GamePlugin {
-
-    static readonly key = 'sound';
+    static readonly key = "sound";
     readonly key = SoundGamePlugin.key;
 
     private masterVolume: number = 1;

@@ -1,8 +1,7 @@
+import { Screen } from "../ui/screen";
 import { Game } from "./game";
-import { Screen } from '../ui/screen';
 
 export abstract class GamePlugin {
-
     abstract get key(): string;
 
     protected game: Game;
@@ -15,19 +14,11 @@ export abstract class GamePlugin {
         this.game = game;
     }
 
-    setup(): void {
+    setup(): void {}
 
-    }
+    setupScreen(screen: Screen): void {}
 
-    setupScreen(screen: Screen): void {
+    cycle(elapsed: number) {}
 
-    }
-
-    cycle(elapsed: number) {
-
-    }
-
-    render() {
-
-    }
+    render() {}
 }

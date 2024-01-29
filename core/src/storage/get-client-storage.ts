@@ -1,10 +1,10 @@
 import { InMemoryStorage } from "./in-memory-storage";
 
 export function getClientStorage(): Storage {
-    const options: ([string, () => Storage])[] = [
-        ['localStorage', () => window.localStorage],
-        ['sessionStorage', () => window.sessionStorage],
-        ['InMemoryStorage', () => new InMemoryStorage()],
+    const options: [string, () => Storage][] = [
+        ["localStorage", () => window.localStorage],
+        ["sessionStorage", () => window.sessionStorage],
+        ["InMemoryStorage", () => new InMemoryStorage()],
     ];
 
     for (const [label, getter] of options) {

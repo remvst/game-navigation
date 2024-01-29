@@ -1,19 +1,22 @@
-import { between } from '../util/math';
-import { ScreenMouseInputs } from './screen-mouse-inputs';
-import { DOMGamepadInputs, DOMKeyboardInputs, DOMMouseInputs, Inputs } from '@remvst/client-inputs';
-import GamepadInputs from '@remvst/client-inputs/lib/gamepad/gamepad-inputs';
-import KeyboardInputs from '@remvst/client-inputs/lib/keyboard/keyboard-inputs';
-import { Screen } from '../ui/screen';
-import { Game } from '../game/game';
+import {
+    DOMGamepadInputs,
+    DOMKeyboardInputs,
+    DOMMouseInputs,
+    Inputs,
+} from "@remvst/client-inputs";
+import GamepadInputs from "@remvst/client-inputs/lib/gamepad/gamepad-inputs";
+import KeyboardInputs from "@remvst/client-inputs/lib/keyboard/keyboard-inputs";
+import { Game } from "../game/game";
+import { Screen } from "../ui/screen";
+import { between } from "../util/math";
+import { ScreenMouseInputs } from "./screen-mouse-inputs";
 
 export class ScreenInputs implements Inputs {
     readonly keyboard = new KeyboardInputs();
     readonly mouse = new ScreenMouseInputs(this.screen.game.params);
     readonly gamepad = new GamepadInputs();
 
-    constructor(readonly screen: Screen) {
-
-    }
+    constructor(readonly screen: Screen) {}
 
     setup() {
         this.keyboard.setup();
@@ -42,20 +45,28 @@ export class GameInputs implements Inputs {
     constructor(private readonly game: Game) {
         this.keyboard.onKeyDown = (keyCode: number) => {
             this.makeGamepadInactive();
-            this.loopScreens((inputs) => inputs.keyboard.setDown(keyCode, true));
+            this.loopScreens((inputs) =>
+                inputs.keyboard.setDown(keyCode, true),
+            );
         };
         this.keyboard.onKeyUp = (keyCode: number) => {
             this.makeGamepadInactive();
-            this.loopScreens((inputs) => inputs.keyboard.setDown(keyCode, false));
+            this.loopScreens((inputs) =>
+                inputs.keyboard.setDown(keyCode, false),
+            );
         };
 
         this.mouse.onMouseDown = (button) => {
             this.makeGamepadInactive();
-            this.loopScreens((inputs) => inputs.mouse.setButtonDown(button, true));
+            this.loopScreens((inputs) =>
+                inputs.mouse.setButtonDown(button, true),
+            );
         };
         this.mouse.onMouseUp = (button) => {
             this.makeGamepadInactive();
-            this.loopScreens((inputs) => inputs.mouse.setButtonDown(button, false));
+            this.loopScreens((inputs) =>
+                inputs.mouse.setButtonDown(button, false),
+            );
         };
         this.mouse.onWheel = (x, y, z) => {
             this.makeGamepadInactive();
@@ -66,14 +77,23 @@ export class GameInputs implements Inputs {
             this.makeGamepadInactive();
 
             const x = between(0, this.mouse.position.x, this.game.params.width);
-            const y = between(0, this.mouse.position.y, this.game.params.height);
+            const y = between(
+                0,
+                this.mouse.position.y,
+                this.game.params.height,
+            );
 
-            this.loopScreens((inputs) => inputs.mouse.setMousePosition(x, y, movementX, movementY));
+            this.loopScreens((inputs) =>
+                inputs.mouse.setMousePosition(x, y, movementX, movementY),
+            );
         };
 
-        this.gamepad.onButtonDown = (button) => this.loopScreens((inputs) => inputs.gamepad.setDown(button, true));
-        this.gamepad.onButtonUp = (button) => this.loopScreens((inputs) => inputs.gamepad.setDown(button, false));
-        this.gamepad.onAxisUpdated = (axis, value) => this.loopScreens((inputs) => inputs.gamepad.setAxis(axis, value));
+        this.gamepad.onButtonDown = (button) =>
+            this.loopScreens((inputs) => inputs.gamepad.setDown(button, true));
+        this.gamepad.onButtonUp = (button) =>
+            this.loopScreens((inputs) => inputs.gamepad.setDown(button, false));
+        this.gamepad.onAxisUpdated = (axis, value) =>
+            this.loopScreens((inputs) => inputs.gamepad.setAxis(axis, value));
     }
 
     setup() {
@@ -81,7 +101,7 @@ export class GameInputs implements Inputs {
         this.mouse.setup();
         this.gamepad.setup();
 
-        window.addEventListener('blur', () => this.reset(), false);
+        window.addEventListener("blur", () => this.reset(), false);
     }
 
     reset() {
@@ -102,7 +122,7 @@ export class GameInputs implements Inputs {
     }
 
     private loopScreens(func: (inputs: Inputs) => void) {
-        for (let i = this.game.screenStack.screens.length - 1 ; i >= 0 ; i--) {
+        for (let i = this.game.screenStack.screens.length - 1; i >= 0; i--) {
             const screen = this.game.screenStack.screens[i];
             func(screen.inputs);
 
@@ -115,4 +135,4 @@ export class GameInputs implements Inputs {
     preventDefault() {
         this.keyboard.preventDefault();
     }
-};
+}

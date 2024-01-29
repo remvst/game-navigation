@@ -1,8 +1,7 @@
 import { GamePlugin } from "../game/game-plugin";
 
 export class BlurPausingGamePlugin extends GamePlugin {
-
-    static readonly key = 'blur-pausing-game';
+    static readonly key = "blur-pausing-game";
     readonly key = BlurPausingGamePlugin.key;
 
     private _enabled = true;
@@ -19,8 +18,8 @@ export class BlurPausingGamePlugin extends GamePlugin {
     setup(): void {
         super.setup();
 
-        window.addEventListener('blur', () => this.updateLoop(), false);
-        window.addEventListener('focus', () => this.updateLoop(), false);
+        window.addEventListener("blur", () => this.updateLoop(), false);
+        window.addEventListener("focus", () => this.updateLoop(), false);
     }
 
     private updateLoop() {

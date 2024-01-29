@@ -2,17 +2,18 @@ import { Keyboard } from "@remvst/client-inputs";
 import { GamePlugin } from "../game/game-plugin";
 
 export class TimeKeysGamePlugin extends GamePlugin {
-
-    static readonly key = 'time-keys';
+    static readonly key = "time-keys";
     readonly key = TimeKeysGamePlugin.key;
 
     speedUpFactor: number;
     slowDownFactor: number;
 
-    constructor(options: {
-        speedUpFactor?: number,
-        slowDownFactor?: number,
-    } = {}) {
+    constructor(
+        options: {
+            speedUpFactor?: number;
+            slowDownFactor?: number;
+        } = {},
+    ) {
         super();
 
         this.speedUpFactor = options.speedUpFactor || 10;

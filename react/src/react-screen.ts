@@ -1,10 +1,9 @@
-import { createRoot, Root } from 'react-dom/client';
-import { HTMLScreen } from '@remvst/game-navigation-html';
+import { HTMLScreen } from "@remvst/game-navigation-html";
+import { createRoot, Root } from "react-dom/client";
 
 export abstract class ReactScreen extends HTMLScreen {
-
     private root: Root;
-    private rootContainer = document.createElement('div');
+    private rootContainer = document.createElement("div");
 
     abstract rootComponent(): Promise<React.ReactElement>;
 
@@ -12,23 +11,23 @@ export abstract class ReactScreen extends HTMLScreen {
         super.setup();
 
         this.root = createRoot(this.rootContainer);
-        this.rootComponent().then(component => {
+        this.rootComponent().then((component) => {
             this.root?.render(component);
         });
 
-        this.rootContainer.style.width = '100%';
-        this.rootContainer.style.height = '100%';
+        this.rootContainer.style.width = "100%";
+        this.rootContainer.style.height = "100%";
     }
 
     foreground(): void {
         super.foreground();
-        this.view.style.display = 'block';
+        this.view.style.display = "block";
         this.view.appendChild(this.rootContainer);
     }
 
     background(): void {
         super.background();
-        this.view.style.display = 'none';
+        this.view.style.display = "none";
         this.rootContainer.parentNode?.removeChild(this.rootContainer);
     }
 
@@ -41,6 +40,6 @@ export abstract class ReactScreen extends HTMLScreen {
     rebuild() {
         this.root.unmount();
         this.root = createRoot(this.rootContainer);
-        this.rootComponent().then(component => this.root.render(component));
+        this.rootComponent().then((component) => this.root.render(component));
     }
 }

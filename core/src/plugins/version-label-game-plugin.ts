@@ -1,14 +1,13 @@
 import { GamePlugin } from "../game/game-plugin";
 
 export class VersionLabelGamePlugin extends GamePlugin {
-
     static readonly key = "version-label";
     readonly key = VersionLabelGamePlugin.key;
 
     constructor(
         private readonly container: HTMLElement,
         private readonly label: string,
-        private readonly extraStyle: string = '',
+        private readonly extraStyle: string = "",
     ) {
         super();
     }
@@ -16,7 +15,7 @@ export class VersionLabelGamePlugin extends GamePlugin {
     setup(): void {
         super.setup();
 
-        const button = document.createElement('div');
+        const button = document.createElement("div");
         button.innerText = this.label;
         button.style.cssText = `
             position: absolute;

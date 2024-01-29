@@ -1,7 +1,7 @@
-import { OperationQueue } from '@remvst/optimization';
-import { ResolverHolder, Resolver } from './resolver';
-import { Game } from '../game/game';
-import { Screen } from '../ui/screen';
+import { OperationQueue } from "@remvst/optimization";
+import { Game } from "../game/game";
+import { Screen } from "../ui/screen";
+import { Resolver, ResolverHolder } from "./resolver";
 
 export enum NavigationType {
     RESET,
@@ -10,17 +10,18 @@ export enum NavigationType {
 }
 
 export class ScreenStack {
-
     readonly screens: Screen[] = [];
     private readonly queue = new OperationQueue();
     prepareScreen: (screen: Screen) => void = () => {};
 
-    constructor(private readonly game: Game) {
+    constructor(private readonly game: Game) {}
 
-    }
-
-    findByType<T extends Screen>(screenType: (new (...params: any) => T)): T | null {
-        return (this.screens.find((scr) => scr instanceof screenType) as T) || null;
+    findByType<T extends Screen>(
+        screenType: new (...params: any) => T,
+    ): T | null {
+        return (
+            (this.screens.find((scr) => scr instanceof screenType) as T) || null
+        );
     }
 
     current() {
@@ -102,11 +103,13 @@ export class ScreenStack {
                     this.reset(screen);
                     break;
                 case NavigationType.REPLACE_EXISTING:
-                    const existing = this.findByType(screen.constructor as new (...params: any) => Screen) as Screen;
+                    const existing = this.findByType(
+                        screen.constructor as new (...params: any) => Screen,
+                    ) as Screen;
                     if (existing) this.popTo(existing, true);
                     this.push(screen);
                     break;
             }
         });
     }
-};
+}

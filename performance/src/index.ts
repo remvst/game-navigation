@@ -1,1 +1,1 @@
-export * from './performance-game-plugin';
+export * from "./performance-game-plugin";

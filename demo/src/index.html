@@ -1,29 +1,29 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
+    <head>
+        <title>Game Navigation Demo</title>
 
-<head>
-    <title>Game Navigation Demo</title>
+        <style>
+            #game-container {
+                position: relative;
+                width: 800px;
+                height: 600px;
+            }
 
-    <style>
-        #game-container {
-            position: relative;
-            width: 800px;
-            height: 600px;
-        }
+            #html-container,
+            #canvas-container,
+            canvas {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+            }
+        </style>
+    </head>
 
-        #html-container, #canvas-container, canvas {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-        }
-    </style>
-</head>
-
-<body>
-    <div id="game-container">
-        <div id="canvas-container"></div>
-        <div id="html-container"></div>
-    </div>
-</body>
-
+    <body>
+        <div id="game-container">
+            <div id="canvas-container"></div>
+            <div id="html-container"></div>
+        </div>
+    </body>
 </html>

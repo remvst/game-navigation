@@ -1,8 +1,7 @@
 import { GamePlugin } from "../game/game-plugin";
 
 export class AutomationGamePlugin extends GamePlugin {
-
-    static readonly key = 'automation';
+    static readonly key = "automation";
     readonly key = AutomationGamePlugin.key;
 
     // Debug
@@ -19,8 +18,8 @@ export class AutomationGamePlugin extends GamePlugin {
     setup(): void {
         super.setup();
 
-        this.automationLabel = document.createElement('div');
-        this.automationLabel.id = 'automation-label';
+        this.automationLabel = document.createElement("div");
+        this.automationLabel.id = "automation-label";
         document.body.appendChild(this.automationLabel);
     }
 
@@ -32,13 +31,14 @@ export class AutomationGamePlugin extends GamePlugin {
         this.automationLabel.innerText = JSON.stringify(automation);
 
         // Disable all CSS animations for automation
-        const styleElement = document.createElement('style');
-        styleElement.setAttribute('id','style-tag');
-        styleElement.innerHTML = '*,:after,:before,.animate-in{transition:none!important;animation:none!important;}';
+        const styleElement = document.createElement("style");
+        styleElement.setAttribute("id", "style-tag");
+        styleElement.innerHTML =
+            "*,:after,:before,.animate-in{transition:none!important;animation:none!important;}";
         document.head.appendChild(styleElement);
     }
 
-    getAutomationValues(out: {[key: string]: any}) {
+    getAutomationValues(out: { [key: string]: any }) {
         this.game.getDebugValues(out);
     }
 }

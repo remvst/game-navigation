@@ -1,12 +1,11 @@
-import { InterpolationPool } from '@remvst/animate.js';
-import { Game } from '../game/game';
-import { ScreenDelegate } from './screen-delegate';
-import { ScreenInputs } from '../interaction/inputs';
+import { InterpolationPool } from "@remvst/animate.js";
+import { Game } from "../game/game";
+import { ScreenInputs } from "../interaction/inputs";
+import { ScreenDelegate } from "./screen-delegate";
 
 export abstract class Screen {
-
     game: Game;
-    cursorType: string = 'default';
+    cursorType: string = "default";
 
     inputs: ScreenInputs;
     age: number = 0;
@@ -42,9 +41,25 @@ export abstract class Screen {
         this.inputs = new ScreenInputs(this);
         this.inputs.keyboard.onKeyDown = (keyCode) => this.keyDown(keyCode);
         this.inputs.keyboard.onKeyUp = (keyCode) => this.keyUp(keyCode);
-        this.inputs.mouse.onMouseDown = (button) => this.mouseDown(button, this.inputs.mouse.position.x, this.inputs.mouse.position.y);
-        this.inputs.mouse.onMouseUp = (button) => this.mouseUp(button, this.inputs.mouse.position.x, this.inputs.mouse.position.y);
-        this.inputs.mouse.onMouseMove = (movementX, movementY) => this.mouseMove(this.inputs.mouse.position.x, this.inputs.mouse.position.y, movementX, movementY);
+        this.inputs.mouse.onMouseDown = (button) =>
+            this.mouseDown(
+                button,
+                this.inputs.mouse.position.x,
+                this.inputs.mouse.position.y,
+            );
+        this.inputs.mouse.onMouseUp = (button) =>
+            this.mouseUp(
+                button,
+                this.inputs.mouse.position.x,
+                this.inputs.mouse.position.y,
+            );
+        this.inputs.mouse.onMouseMove = (movementX, movementY) =>
+            this.mouseMove(
+                this.inputs.mouse.position.x,
+                this.inputs.mouse.position.y,
+                movementX,
+                movementY,
+            );
         this.inputs.mouse.onWheel = (x, y, z) => this.wheel(x, y, z);
         this.inputs.setup();
 
@@ -144,9 +159,9 @@ export abstract class Screen {
         }
     }
 
-    addDebugValues(values: {[key: string]: any}) {
-        values['screen.id'] = this.id;
-        values['screen.interpolations'] = this.interpolationPool.size;
+    addDebugValues(values: { [key: string]: any }) {
+        values["screen.id"] = this.id;
+        values["screen.interpolations"] = this.interpolationPool.size;
     }
 
     get isForeground() {
@@ -166,7 +181,7 @@ export abstract class Screen {
     }
 
     get isCycling() {
-        for (let i = this.game.screenStack.screens.length - 1 ; i >= 0 ; i--) {
+        for (let i = this.game.screenStack.screens.length - 1; i >= 0; i--) {
             const screen = this.game.screenStack.screens[i];
             if (screen === this) return true;
             if (screen.absorbCycle) return false;
@@ -175,7 +190,7 @@ export abstract class Screen {
     }
 
     get isTakingInputs() {
-        for (let i = this.game.screenStack.screens.length - 1 ; i >= 0 ; i--) {
+        for (let i = this.game.screenStack.screens.length - 1; i >= 0; i--) {
             const screen = this.game.screenStack.screens[i];
             if (screen === this) return true;
             if (screen.absorbInputs) return false;

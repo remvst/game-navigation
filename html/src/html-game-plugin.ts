@@ -1,13 +1,10 @@
 import { GamePlugin } from "@remvst/game-navigation-core";
 
 export class HTMLGamePlugin extends GamePlugin {
-
-    static readonly key = 'html';
+    static readonly key = "html";
     readonly key = HTMLGamePlugin.key;
 
-    constructor(
-        readonly htmlContainer: HTMLElement,
-    ) {
+    constructor(readonly htmlContainer: HTMLElement) {
         super();
     }
 }

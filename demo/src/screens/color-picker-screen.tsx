@@ -1,4 +1,4 @@
-import { Resolver } from "@remvst/game-navigation-core";
+import { Resolver, UserCancelledError } from "@remvst/game-navigation-core";
 import { ReactScreen } from "@remvst/game-navigation-react";
 import React, { ReactElement, JSXElementConstructor } from "react";
 
@@ -24,6 +24,7 @@ export class ColorPickerScreen extends ReactScreen {
             <h1>Pick a square color</h1>
             <button onClick={() => this.resolver.resolve(0xff0000)}>red square</button>
             <button onClick={() => this.resolver.resolve(0x0000ff)}>blue square</button>
+            <button onClick={() => this.resolver.reject(new UserCancelledError())}>cancel</button>
         </div>);
     }
 

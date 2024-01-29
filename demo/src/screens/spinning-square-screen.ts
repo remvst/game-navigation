@@ -1,7 +1,8 @@
 import { ColorPickerScreen } from './color-picker-screen';
 import { Keyboard, KeyBindingsSettings, BindingDefinition, BindingDefinitionSet, set, keyboard, isDown } from '@remvst/client-inputs';
+import { navigationFlow } from '@remvst/game-navigation-core';
 import { PIXIScreen } from "@remvst/game-navigation-pixi";
-import { Sprite, Texture } from "pixi.js";
+import { Sprite, Texture, Text } from "pixi.js";
 
 export class SpinningSquareScreen extends PIXIScreen {
     readonly id ='spinning-square';
@@ -16,10 +17,29 @@ export class SpinningSquareScreen extends PIXIScreen {
 
     private readonly keyBindingSettings = (() => {
         const definitions = new BindingDefinitionSet([
-            new BindingDefinition('navigation', 'back', 'Back', true, set(keyboard(Keyboard.ESC), keyboard(Keyboard.BACKSPACE))),
+            new BindingDefinition('navigation', 'changeColor', 'Change Color', true, set(keyboard(Keyboard.ESC), keyboard(Keyboard.BACKSPACE))),
         ]);
 
         return new KeyBindingsSettings(definitions);
+    })();
+
+    private readonly instruction = (() => {
+        const text = new Text('', {
+            fill: '#fff',
+            align: 'center',
+        });
+
+        text.text = this.keyBindingSettings.definitionSet.definitions
+            .map((definition) => {
+                const label = definition.label
+                const keys = this.keyBindingSettings.binding(definition.key).bindings.map(binding => binding.label).join(' / ');
+
+                return `${label}: ${keys}`;
+            })
+            .join('\n')
+
+        text.anchor.set(0.5, 0);
+        return text;
     })();
 
     constructor(private readonly color: number) {
@@ -32,6 +52,9 @@ export class SpinningSquareScreen extends PIXIScreen {
         this.square.position.set(this.game.params.width / 2, this.game.params.height / 2);
         this.view.addChild(this.square);
 
+        this.instruction.position.set(this.game.params.width / 2, 20)
+        this.view.addChild(this.instruction);
+
         this.changeColor();
     }
 
@@ -39,13 +62,18 @@ export class SpinningSquareScreen extends PIXIScreen {
         super.cycle(elapsed);
         this.square.rotation += elapsed * Math.PI;
 
-        if (this.isForeground && isDown(this.game.inputs, this.keyBindingSettings.binding('back'))) {
+        if (this.isTakingInputs && isDown(this.game.inputs, this.keyBindingSettings.binding('changeColor'))) {
             this.changeColor();
         }
+
+        this.instruction.visible = this.isTakingInputs;
     }
 
-    async changeColor() {
-        const color = await this.game.screenStack.resolvableScreen(new ColorPickerScreen());
+    private async changeColor() {
+
+        const color = await navigationFlow((async () => {
+            return await this.game.screenStack.resolvableScreen(new ColorPickerScreen());
+        })())
         this.square.tint = color;
     }
 

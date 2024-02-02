@@ -2,6 +2,12 @@ import { GamePlugin } from "@remvst/game-navigation-core";
 import { Container, IRenderer, Text, autoDetectRenderer } from "pixi.js";
 import { PIXIScreen } from "./pixi-screen";
 
+export interface PIXIGamePluginOptions {
+    readonly width: number;
+    readonly height: number;
+    readonly resolution: number;
+}
+
 export class PIXIGamePlugin extends GamePlugin {
     static readonly key = "pixi";
     readonly key = PIXIGamePlugin.key;
@@ -32,7 +38,7 @@ export class PIXIGamePlugin extends GamePlugin {
 
     constructor(
         readonly canvasContainer: HTMLElement,
-        private resolution: number = 1,
+        private options: PIXIGamePluginOptions,
     ) {
         super();
     }
@@ -42,7 +48,7 @@ export class PIXIGamePlugin extends GamePlugin {
 
         this.stage.addChild(this.screenContainer, this.debugger);
 
-        this.setResolution(this.resolution);
+        this.setOptions(this.options);
     }
 
     setNeedsRerender() {
@@ -65,18 +71,24 @@ export class PIXIGamePlugin extends GamePlugin {
         }
     }
 
-    setResolution(resolution: number) {
-        if (resolution === this.resolution && this.renderer) {
-            return;
+    setOptions(options: PIXIGamePluginOptions) {
+        if (this.renderer) {
+            if (
+                options.resolution === this.options.resolution &&
+                options.width === this.options.width &&
+                options.height === this.options.height
+            ) {
+                return;
+            }
         }
 
-        this.resolution = resolution;
+        this.options = options;
         this.updateRenderer();
     }
 
     updateRenderer() {
-        const canvasWidth = this.game.params.width * this.resolution;
-        const canvasHeight = this.game.params.height * this.resolution;
+        const canvasWidth = this.options.width * this.options.resolution;
+        const canvasHeight = this.options.height * this.options.resolution;
 
         if (!this.renderer) {
             // PIXI renderer
@@ -95,8 +107,8 @@ export class PIXIGamePlugin extends GamePlugin {
             this.renderer.resize(canvasWidth, canvasHeight);
         }
 
-        this.stage.scale.x = this.resolution;
-        this.stage.scale.y = this.resolution;
+        this.stage.scale.x = this.options.resolution;
+        this.stage.scale.y = this.options.resolution;
 
         const cssRoot = document.querySelector(":root") as HTMLElement;
         cssRoot.style.setProperty(
@@ -108,7 +120,7 @@ export class PIXIGamePlugin extends GamePlugin {
     }
 
     updateLayout() {
-        this.debugger.position.set(5, this.game.params.height - 5);
+        this.debugger.position.set(5, this.options.height - 5);
         for (const screen of this.game.screenStack.screens) {
             if (screen instanceof PIXIScreen) {
                 screen.updateLayout();

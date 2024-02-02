@@ -11,7 +11,11 @@ import { SpinningSquareScreen } from "./screens/spinning-square-screen";
 
 export class MyGame extends Game {
     readonly plugins = [
-        new PIXIGamePlugin(document.querySelector("#canvas-container")),
+        new PIXIGamePlugin(document.querySelector("#canvas-container"), {
+            resolution: 1,
+            width: this.params.width,
+            height: this.params.height,
+        }),
         new HTMLGamePlugin(document.querySelector("#html-container")),
         // new AutomationGamePlugin(1),
         new TimeKeysGamePlugin(),

@@ -41,16 +41,19 @@ export abstract class Game<ParamsType extends GameParams = GameParams> {
     }
 
     setup() {
-        for (const plugin of this.plugins) {
-            plugin.bind(this);
-            plugin.setup();
-            this.pluginMap.set(plugin.key, plugin);
-        }
-
         this.inputs = new GameInputs(this);
         this.inputs.setup();
 
         this.screenStack = new ScreenStack(this);
+
+        for (const plugin of this.plugins) {
+            plugin.bind(this);
+            this.pluginMap.set(plugin.key, plugin);
+        }
+
+        for (const plugin of this.plugins) {
+            plugin.setup();
+        }
 
         this.lastFrame = window.performance.now();
         this.scheduleFrame();

@@ -197,4 +197,10 @@ export abstract class Screen {
         }
         return false;
     }
+
+    updateLayout(): void {
+        for (const subscreen of this.subscreens) {
+            subscreen.updateLayout();
+        }
+    }
 }

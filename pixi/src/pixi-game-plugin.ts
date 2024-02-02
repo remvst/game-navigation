@@ -1,6 +1,5 @@
 import { GamePlugin } from "@remvst/game-navigation-core";
 import { Container, IRenderer, Text, autoDetectRenderer } from "pixi.js";
-import { PIXIScreen } from "./pixi-screen";
 
 export interface PIXIGamePluginOptions {
     readonly width: number;
@@ -41,6 +40,16 @@ export class PIXIGamePlugin extends GamePlugin {
         private options: PIXIGamePluginOptions,
     ) {
         super();
+    }
+
+    get width(): number {
+        return this.options.width;
+    }
+    get height(): number {
+        return this.options.height;
+    }
+    get resolution(): number {
+        return this.options.resolution;
     }
 
     setup(): void {
@@ -122,9 +131,7 @@ export class PIXIGamePlugin extends GamePlugin {
     updateLayout() {
         this.debugger.position.set(5, this.options.height - 5);
         for (const screen of this.game.screenStack.screens) {
-            if (screen instanceof PIXIScreen) {
-                screen.updateLayout();
-            }
+            screen.updateLayout();
         }
     }
 

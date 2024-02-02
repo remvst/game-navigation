@@ -28,12 +28,16 @@ export abstract class PIXIScreen extends Screen {
         this.game.plugin(PIXIGamePlugin).setNeedsRerender();
     }
 
-    updateLayout(): void {
-        for (const subscreen of this.subscreens) {
-            if (subscreen instanceof PIXIScreen) {
-                subscreen.updateLayout();
-            }
-        }
+    get width(): number {
+        return this.game.plugin(PIXIGamePlugin).width;
+    }
+
+    get height(): number {
+        return this.game.plugin(PIXIGamePlugin).height;
+    }
+
+    get resolution(): number {
+        return this.game.plugin(PIXIGamePlugin).resolution;
     }
 }
 

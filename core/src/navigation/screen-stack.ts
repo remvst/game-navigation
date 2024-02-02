@@ -60,6 +60,14 @@ export class ScreenStack {
         });
     }
 
+    replaceExisting(screen: Screen) {
+        const existing = this.findByType(
+            screen.constructor as new (...params: any) => Screen,
+        ) as Screen;
+        if (existing) this.popTo(existing, true);
+        this.push(screen);
+    }
+
     pop() {
         this.queue.execute(() => {
             const screen = this.screens.pop();
@@ -103,11 +111,7 @@ export class ScreenStack {
                     this.reset(screen);
                     break;
                 case NavigationType.REPLACE_EXISTING:
-                    const existing = this.findByType(
-                        screen.constructor as new (...params: any) => Screen,
-                    ) as Screen;
-                    if (existing) this.popTo(existing, true);
-                    this.push(screen);
+                    this.replaceExisting(screen);
                     break;
             }
         });

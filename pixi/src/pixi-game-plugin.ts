@@ -1,5 +1,6 @@
 import { GamePlugin } from "@remvst/game-navigation-core";
 import { Container, IRenderer, Text, autoDetectRenderer } from "pixi.js";
+import { PIXIScreen } from "./pixi-screen";
 
 export class PIXIGamePlugin extends GamePlugin {
     static readonly key = "pixi";
@@ -39,7 +40,6 @@ export class PIXIGamePlugin extends GamePlugin {
     setup(): void {
         super.setup();
 
-        this.debugger.position.set(5, this.game.params.height - 5);
         this.stage.addChild(this.screenContainer, this.debugger);
 
         this.setResolution(this.resolution);
@@ -71,7 +71,10 @@ export class PIXIGamePlugin extends GamePlugin {
         }
 
         this.resolution = resolution;
+        this.updateRenderer();
+    }
 
+    updateRenderer() {
         const canvasWidth = this.game.params.width * this.resolution;
         const canvasHeight = this.game.params.height * this.resolution;
 
@@ -92,14 +95,25 @@ export class PIXIGamePlugin extends GamePlugin {
             this.renderer.resize(canvasWidth, canvasHeight);
         }
 
-        this.stage.scale.x = resolution;
-        this.stage.scale.y = resolution;
+        this.stage.scale.x = this.resolution;
+        this.stage.scale.y = this.resolution;
 
         const cssRoot = document.querySelector(":root") as HTMLElement;
         cssRoot.style.setProperty(
             "--aspect-ratio",
             `${canvasWidth} / ${canvasHeight}`,
         );
+
+        this.updateLayout();
+    }
+
+    updateLayout() {
+        this.debugger.position.set(5, this.game.params.height - 5);
+        for (const screen of this.game.screenStack.screens) {
+            if (screen instanceof PIXIScreen) {
+                screen.updateLayout();
+            }
+        }
     }
 
     setDebugVisible(visible: boolean) {

@@ -13,7 +13,7 @@ export abstract class Screen {
     interpolationPool: InterpolationPool;
     delegate: ScreenDelegate | null = null;
 
-    private readonly subscreens: Screen[] = [];
+    protected readonly subscreens: Screen[] = [];
 
     constructor() {
         this.game = null;

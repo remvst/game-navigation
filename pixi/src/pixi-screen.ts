@@ -27,6 +27,14 @@ export abstract class PIXIScreen extends Screen {
         super.cycle(elapsed);
         this.game.plugin(PIXIGamePlugin).setNeedsRerender();
     }
+
+    updateLayout(): void {
+        for (const subscreen of this.subscreens) {
+            if (subscreen instanceof PIXIScreen) {
+                subscreen.updateLayout();
+            }
+        }
+    }
 }
 
 function treeSize(tree: DisplayObject): number {

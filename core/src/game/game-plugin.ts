@@ -20,5 +20,14 @@ export abstract class GamePlugin {
 
     cycle(elapsed: number) {}
 
+    onCycleStart() {}
+    onCycleEnd() {}
+
+    onRenderStart() {}
+    onRenderEnd() {}
+
     render() {}
+
+    onFrameStart() {}
+    onFrameEnd() {}
 }

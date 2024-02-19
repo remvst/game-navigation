@@ -1,4 +1,3 @@
-import { PerformanceRecorder } from "@remvst/client-performance";
 import { GameInputs } from "../interaction/inputs";
 import { ScreenStack } from "../navigation/screen-stack";
 import { GameParams } from "./game-params";
@@ -20,11 +19,6 @@ export abstract class Game<ParamsType extends GameParams = GameParams> {
     // Cycle loop
     private animationFrameId: number;
     private runningLoop = false;
-
-    // Performance
-    readonly performanceRecorder = new PerformanceRecorder({
-        recordCount: Math.floor(window.innerWidth / 3),
-    });
 
     constructor(readonly params: ParamsType) {
         this.parseURL();
@@ -85,8 +79,7 @@ export abstract class Game<ParamsType extends GameParams = GameParams> {
     }
 
     frame() {
-        this.performanceRecorder.roll();
-        this.performanceRecorder.onStart("FRAME");
+        for (const plugin of this.plugins) plugin.onFrameStart();
 
         const now = window.performance.now();
         const elapsedMs = now - this.lastFrame;
@@ -97,15 +90,15 @@ export abstract class Game<ParamsType extends GameParams = GameParams> {
 
         this.lastFrame = now;
 
+        for (const plugin of this.plugins) plugin.onCycleStart();
         this.cycle(elapsed);
+        for (const plugin of this.plugins) plugin.onCycleEnd();
 
-        this.performanceRecorder.onStart("RENDER");
-        for (const plugin of this.plugins) {
-            plugin.render();
-        }
-        this.performanceRecorder.onEnd("RENDER");
+        for (const plugin of this.plugins) plugin.onRenderStart();
+        for (const plugin of this.plugins) plugin.render();
+        for (const plugin of this.plugins) plugin.onRenderEnd();
 
-        this.performanceRecorder.onEnd("FRAME");
+        for (const plugin of this.plugins) plugin.onFrameEnd();
 
         if (this.runningLoop) {
             this.scheduleFrame();

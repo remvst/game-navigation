@@ -6,9 +6,9 @@ import {
     VersionLabelGamePlugin,
 } from "@remvst/game-navigation-core";
 import { HTMLGamePlugin } from "@remvst/game-navigation-html";
+import { PerformanceGamePlugin } from "@remvst/game-navigation-performance";
 import { PIXIGamePlugin } from "@remvst/game-navigation-pixi";
 import { SpinningSquareScreen } from "./screens/spinning-square-screen";
-import { PerformanceGamePlugin } from "@remvst/game-navigation-performance";
 
 export class MyGame extends Game {
     readonly plugins = [
@@ -29,7 +29,9 @@ export class MyGame extends Game {
             "VERSION ONE - EARLY ACCESS",
             "color: red;",
         ),
-        new PerformanceGamePlugin(document.body.querySelector('#perf-container')),
+        new PerformanceGamePlugin(
+            document.body.querySelector("#perf-container"),
+        ),
     ];
 
     setup(): void {

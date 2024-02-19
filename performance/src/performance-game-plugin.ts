@@ -9,18 +9,14 @@ export class PerformanceGamePlugin extends GamePlugin {
         autoPlace: false,
     });
 
-    constructor(
-        private readonly performanceRendererContainer: HTMLElement,
-    ) {
+    constructor(private readonly performanceRendererContainer: HTMLElement) {
         super();
     }
 
     setup(): void {
         super.setup();
 
-        this.performanceRendererContainer.appendChild(
-            this.gameStats.dom,
-        );
+        this.performanceRendererContainer.appendChild(this.gameStats.dom);
     }
 
     setRendererVisible(visible: boolean) {
@@ -36,18 +32,18 @@ export class PerformanceGamePlugin extends GamePlugin {
     }
 
     onCycleStart() {
-        this.gameStats.begin('cycle', '#0000ff');
+        this.gameStats.begin("cycle", "#0000ff");
     }
 
     onCycleEnd() {
-        this.gameStats.end('cycle');
+        this.gameStats.end("cycle");
     }
 
     onRenderStart() {
-        this.gameStats.begin('render', '#ffff0000');
+        this.gameStats.begin("render", "#ffff0000");
     }
 
     onRenderEnd() {
-        this.gameStats.end('render');
+        this.gameStats.end("render");
     }
 }

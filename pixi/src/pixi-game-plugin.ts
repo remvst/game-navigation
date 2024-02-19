@@ -107,6 +107,7 @@ export class PIXIGamePlugin extends GamePlugin {
                 resolution: 1,
                 antialias: true,
             });
+            this.app.ticker.stop(); // core has its own ticker
 
             // PIXI renderer
             this.renderer = this.app.renderer;

@@ -8,6 +8,7 @@ import {
 import { HTMLGamePlugin } from "@remvst/game-navigation-html";
 import { PIXIGamePlugin } from "@remvst/game-navigation-pixi";
 import { SpinningSquareScreen } from "./screens/spinning-square-screen";
+import { PerformanceGamePlugin } from "@remvst/game-navigation-performance";
 
 export class MyGame extends Game {
     readonly plugins = [
@@ -28,12 +29,14 @@ export class MyGame extends Game {
             "VERSION ONE - EARLY ACCESS",
             "color: red;",
         ),
+        new PerformanceGamePlugin(document.body.querySelector('#perf-container')),
     ];
 
     setup(): void {
         super.setup();
 
         this.plugin(PIXIGamePlugin).setDebugVisible(true);
+        this.plugin(PerformanceGamePlugin).setRendererVisible(true);
 
         this.screenStack.reset(new SpinningSquareScreen(0xffffff));
     }

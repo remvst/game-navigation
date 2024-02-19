@@ -1,3 +1,4 @@
+import * as PIXI from 'pixi.js';
 import {
     BlurPausingGamePlugin,
     FullscreenButtonGamePlugin,
@@ -39,6 +40,8 @@ export class MyGame extends Game {
 
         this.plugin(PIXIGamePlugin).setDebugVisible(true);
         this.plugin(PerformanceGamePlugin).setRendererVisible(true);
+
+        (this.plugin(PerformanceGamePlugin).gameStats as any).enableExtension('pixi', [PIXI, this.plugin(PIXIGamePlugin).app]);
 
         this.screenStack.reset(new SpinningSquareScreen(0xffffff));
     }

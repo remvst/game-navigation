@@ -1,5 +1,5 @@
 import { GamePlugin } from "@remvst/game-navigation-core";
-import { Container, IRenderer, Text, autoDetectRenderer } from "pixi.js";
+import { Application, Container, ICanvas, IRenderer, Text, autoDetectRenderer } from "pixi.js";
 
 export interface PIXIGamePluginOptions {
     readonly width: number;
@@ -11,14 +11,15 @@ export class PIXIGamePlugin extends GamePlugin {
     static readonly key = "pixi";
     readonly key = PIXIGamePlugin.key;
 
-    private canvas: HTMLCanvasElement;
+    private canvas: ICanvas;
 
     // Scene
     readonly stage = new Container();
     readonly screenContainer = new Container();
 
     // Rendering
-    renderer: IRenderer<HTMLCanvasElement>;
+    app: Application;
+    renderer: IRenderer<ICanvas>;
     private needsRerender = true;
 
     // Debugging
@@ -99,19 +100,20 @@ export class PIXIGamePlugin extends GamePlugin {
         const canvasWidth = this.options.width * this.options.resolution;
         const canvasHeight = this.options.height * this.options.resolution;
 
-        if (!this.renderer) {
-            // PIXI renderer
-            this.renderer = autoDetectRenderer<HTMLCanvasElement>({
+        if (!this.app) {
+            this.app = new Application({
                 width: canvasWidth,
                 height: canvasHeight,
                 resolution: 1,
                 antialias: true,
-            });
+            })
 
+            // PIXI renderer
+            this.renderer = this.app.renderer;
             this.renderer.options.antialias = true;
 
             this.canvas = this.renderer.view;
-            this.canvasContainer.appendChild(this.canvas);
+            this.canvasContainer.appendChild(this.canvas as unknown as HTMLElement);
         } else {
             this.renderer.resize(canvasWidth, canvasHeight);
         }

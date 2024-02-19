@@ -1,5 +1,5 @@
 import { GamePlugin } from "@remvst/game-navigation-core";
-import { Application, Container, ICanvas, IRenderer, Text, autoDetectRenderer } from "pixi.js";
+import { Application, Container, ICanvas, IRenderer, Text } from "pixi.js";
 
 export interface PIXIGamePluginOptions {
     readonly width: number;
@@ -106,14 +106,16 @@ export class PIXIGamePlugin extends GamePlugin {
                 height: canvasHeight,
                 resolution: 1,
                 antialias: true,
-            })
+            });
 
             // PIXI renderer
             this.renderer = this.app.renderer;
             this.renderer.options.antialias = true;
 
             this.canvas = this.renderer.view;
-            this.canvasContainer.appendChild(this.canvas as unknown as HTMLElement);
+            this.canvasContainer.appendChild(
+                this.canvas as unknown as HTMLElement,
+            );
         } else {
             this.renderer.resize(canvasWidth, canvasHeight);
         }

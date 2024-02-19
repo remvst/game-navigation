@@ -40,7 +40,7 @@ export class PerformanceGamePlugin extends GamePlugin {
     }
 
     onRenderStart() {
-        this.gameStats.begin("render", "#ffff0000");
+        this.gameStats.begin("render", "#ffff00");
     }
 
     onRenderEnd() {

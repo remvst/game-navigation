@@ -164,7 +164,6 @@ export abstract class Game<ParamsType extends GameParams = GameParams> {
     }
 
     onCurrentScreenChanged() {
-        (window as any).S = this.screenStack.current();
         this.container.style.cursor = this.screenStack.current()?.cursorType;
     }
 }

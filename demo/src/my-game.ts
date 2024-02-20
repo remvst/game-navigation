@@ -6,7 +6,9 @@ import {
     VersionLabelGamePlugin,
 } from "@remvst/game-navigation-core";
 import { HTMLGamePlugin } from "@remvst/game-navigation-html";
+import { PerformanceGamePlugin } from "@remvst/game-navigation-performance";
 import { PIXIGamePlugin } from "@remvst/game-navigation-pixi";
+import * as PIXI from "pixi.js";
 import { SpinningSquareScreen } from "./screens/spinning-square-screen";
 
 export class MyGame extends Game {
@@ -28,12 +30,21 @@ export class MyGame extends Game {
             "VERSION ONE - EARLY ACCESS",
             "color: red;",
         ),
+        new PerformanceGamePlugin(
+            document.body.querySelector("#perf-container"),
+        ),
     ];
 
     setup(): void {
         super.setup();
 
         this.plugin(PIXIGamePlugin).setDebugVisible(true);
+        this.plugin(PerformanceGamePlugin).setRendererVisible(true);
+
+        (this.plugin(PerformanceGamePlugin).gameStats as any).enableExtension(
+            "pixi",
+            [PIXI, this.plugin(PIXIGamePlugin).app],
+        );
 
         this.screenStack.reset(new SpinningSquareScreen(0xffffff));
     }

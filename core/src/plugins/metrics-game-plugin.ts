@@ -1,6 +1,5 @@
 import { GamePlugin } from "../game/game-plugin";
 import { UserCancelledError } from "../navigation/resolver";
-import { FrameRateCounts } from "../tracking/framerate-counts";
 import { Tracker } from "../tracking/tracker";
 import { TrackingScreenDelegate } from "../tracking/tracking-screen-delegate";
 import { Screen } from "../ui/screen";
@@ -9,18 +8,12 @@ export class MetricsGamePlugin extends GamePlugin {
     static readonly key = "metrics";
     readonly key = MetricsGamePlugin.key;
 
-    private framerateCounts: FrameRateCounts;
-
     constructor(readonly tracker: Tracker) {
         super();
     }
 
     setup(): void {
         super.setup();
-
-        this.framerateCounts = new FrameRateCounts(
-            this.game.performanceRecorder,
-        );
 
         window.addEventListener(
             "error",
@@ -51,11 +44,6 @@ export class MetricsGamePlugin extends GamePlugin {
         );
 
         this.tracker.track("gameSetup", {});
-    }
-
-    cycle(elapsed: number): void {
-        super.cycle(elapsed);
-        this.framerateCounts.cycle(elapsed);
     }
 
     setupScreen(screen: Screen): void {

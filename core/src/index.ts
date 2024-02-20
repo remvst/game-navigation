@@ -23,7 +23,6 @@ export * from "./storage/get-client-storage";
 export * from "./storage/in-memory-storage";
 export * from "./storage/local-json-store";
 
-export * from "./tracking/framerate-counts";
 export * from "./tracking/properties-provider";
 export * from "./tracking/tracker";
 export * from "./tracking/tracking-screen-delegate";

@@ -1,16 +1,13 @@
-import {
-    PerformanceRenderer,
-    renderExecutionTime,
-    renderFramerate,
-} from "@remvst/client-performance";
 import { GamePlugin } from "@remvst/game-navigation-core";
+import GameStats from "gamestats.js";
 
 export class PerformanceGamePlugin extends GamePlugin {
     static readonly key = "performance";
     readonly key = PerformanceGamePlugin.key;
 
-    private performanceRenderer: PerformanceRenderer;
-    private visible: boolean = false;
+    readonly gameStats = new GameStats({
+        autoPlace: false,
+    });
 
     constructor(private readonly performanceRendererContainer: HTMLElement) {
         super();
@@ -19,38 +16,34 @@ export class PerformanceGamePlugin extends GamePlugin {
     setup(): void {
         super.setup();
 
-        this.performanceRenderer = new PerformanceRenderer(
-            this.game.performanceRecorder,
-            [
-                { color: "#f00", renderer: renderFramerate("FRAME") },
-                { color: "#08f", renderer: renderExecutionTime("GAME_LOOP") },
-                { color: "#ff0", renderer: renderExecutionTime("RENDER") },
-                {
-                    color: "#00f",
-                    renderer: renderExecutionTime("UPDATE_VIEWS"),
-                },
-            ],
-            Math.max(
-                2,
-                window.innerWidth / this.game.performanceRecorder.frames.length,
-            ),
-        );
-
-        this.performanceRendererContainer.appendChild(
-            this.performanceRenderer.view,
-        );
+        this.performanceRendererContainer.appendChild(this.gameStats.dom);
     }
 
     setRendererVisible(visible: boolean) {
-        this.visible = visible;
-        this.performanceRendererContainer.style.display = visible
-            ? "block"
-            : "none";
+        (this.gameStats as any).show(visible);
     }
 
-    cycle(elapsed: number): void {
-        if (this.visible) {
-            this.performanceRenderer.update();
-        }
+    onFrameStart() {
+        this.gameStats.begin();
+    }
+
+    onFrameEnd() {
+        this.gameStats.end();
+    }
+
+    onCycleStart() {
+        this.gameStats.begin("cycle", "#0000ff");
+    }
+
+    onCycleEnd() {
+        this.gameStats.end("cycle");
+    }
+
+    onRenderStart() {
+        this.gameStats.begin("render", "#ffff00");
+    }
+
+    onRenderEnd() {
+        this.gameStats.end("render");
     }
 }

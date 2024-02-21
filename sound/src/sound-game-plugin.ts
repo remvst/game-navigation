@@ -19,7 +19,7 @@ export class SoundGamePlugin extends GamePlugin {
     }
 
     playSoundEffect(howl: Howl, relativeVolume: number = 1) {
-        howl.volume(this.effectsVolume * this.masterVolume * relativeVolume);
+        howl.volume(this.effectsVolume * relativeVolume);
         return howl.play();
     }
 

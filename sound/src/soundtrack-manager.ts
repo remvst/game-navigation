@@ -52,12 +52,27 @@ export class SoundtrackManager {
         this.currentHowlId = null;
 
         this.currentSoundIndex++;
+        this.playCurrentHowl();
+    }
 
+    private playCurrentHowl() {
         let songs: Howl[] = this.songMapping.get(this.currentType);
         if (!songs || !songs.length) return;
 
         const { currentType } = this;
         const howl = songs[this.currentSoundIndex % songs.length];
+
+        // Not loaded yet, wait it to load then try again
+        if (howl.state() !== 'loaded') {
+            const { currentSoundIndex } = this;
+
+            howl.once('load', () => {
+                if (this.currentSoundIndex !== currentSoundIndex) return;
+                this.playCurrentHowl();
+            });
+            return;
+        }
+
         howl.volume(this.howlVolume);
 
         const howlId = howl.play();

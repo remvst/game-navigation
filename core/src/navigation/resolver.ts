@@ -1,6 +1,10 @@
 import { Screen } from "../ui/screen";
 
-export class UserCancelledError extends Error {}
+export class UserCancelledError extends Error {
+    constructor(message: string) {
+        super(message || 'User backed out and cancelled navigation flow');
+    }
+}
 
 export class Resolver<T> {
     private readonly screen: Screen;

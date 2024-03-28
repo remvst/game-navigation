@@ -5,9 +5,7 @@ import React from "react";
 export class ColorPickerScreen extends ReactScreen {
     resolver: Resolver<number>;
 
-    get id(): string {
-        return "color-picker";
-    }
+    readonly id = "color-picker";
 
     async rootComponent(): Promise<React.ReactElement> {
         return (

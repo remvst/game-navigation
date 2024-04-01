@@ -9,7 +9,11 @@ export function getClientStorage(): Storage {
 
     for (const [label, getter] of options) {
         try {
-            return getter();
+            const storage = getter();
+            if (!storage) {
+                throw new Error(`${label} getter returned falsy`);
+            }
+            return storage;
         } catch (err) {
             console.error(`Failed to get ${label} (${err.message}), falling back`, err);
         }

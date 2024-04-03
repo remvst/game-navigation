@@ -4,7 +4,7 @@ import { ScreenInputs } from "../interaction/inputs";
 import { ScreenDelegate } from "./screen-delegate";
 
 export abstract class Screen {
-    game: Game;
+    game: Game = null;
     cursorType: string = "default";
 
     inputs: ScreenInputs;
@@ -14,10 +14,6 @@ export abstract class Screen {
     delegate: ScreenDelegate | null = null;
 
     protected readonly subscreens: Screen[] = [];
-
-    constructor() {
-        this.game = null;
-    }
 
     addSubscreen(screen: Screen) {
         this.subscreens.push(screen);
@@ -72,6 +68,7 @@ export abstract class Screen {
     }
 
     destroy() {
+        this.interpolationPool.clear();
         this.delegate?.onDestroy();
 
         for (const sub of this.subscreens) {

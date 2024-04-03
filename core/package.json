@@ -1,6 +1,6 @@
 {
     "name": "@remvst/game-navigation-core",
-    "version": "1.8.3",
+    "version": "1.8.4",
     "description": "",
     "main": "lib/index.js",
     "scripts": {
@@ -10,7 +10,7 @@
     "author": "Rémi Vansteelandt",
     "license": "UNLICENSED",
     "dependencies": {
-        "@remvst/animate.js": "^3.0.0",
+        "@remvst/animate.js": "^3.1.0",
         "@remvst/client-inputs": "^1.0.4",
         "@remvst/optimization": "^1.0.1"
     },

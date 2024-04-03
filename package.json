@@ -7,7 +7,7 @@
         "prettier:check": "prettier . --check",
         "postinstall": "subpkg install",
         "build": "subpkg run build",
-        "test": "npm run prettier:check"
+        "test": "npm run prettier:check && npm run build"
     },
     "author": "Rémi Vansteelandt",
     "license": "UNLICENSED",

@@ -63,10 +63,10 @@ export class SoundtrackManager {
         const howl = songs[this.currentSoundIndex % songs.length];
 
         // Not loaded yet, wait it to load then try again
-        if (howl.state() !== 'loaded') {
+        if (howl.state() !== "loaded") {
             const { currentSoundIndex } = this;
 
-            howl.once('load', () => {
+            howl.once("load", () => {
                 if (this.currentSoundIndex !== currentSoundIndex) return;
                 this.playCurrentHowl();
             });

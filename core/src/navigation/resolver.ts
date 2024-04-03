@@ -1,7 +1,9 @@
 import { Screen } from "../ui/screen";
 
 export class UserCancelledError extends Error {
-    constructor(message: string = 'User backed out and cancelled navigation flow') {
+    constructor(
+        message: string = "User backed out and cancelled navigation flow",
+    ) {
         super(message);
     }
 }

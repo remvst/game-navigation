@@ -17,6 +17,6 @@ export function navigationFlow<T>(flow: Promise<T> | (() => Promise<T>)): void {
     });
 }
 
-export function navigationClickHandler<T>(flow: (() => Promise<T>)): () => void {
+export function navigationClickHandler<T>(flow: () => Promise<T>): () => void {
     return () => navigationFlow(flow);
 }

@@ -15,7 +15,10 @@ export function getClientStorage(): Storage {
             }
             return storage;
         } catch (err) {
-            console.error(`Failed to get ${label} (${err.message}), falling back`, err);
+            console.error(
+                `Failed to get ${label} (${err.message}), falling back`,
+                err,
+            );
         }
     }
 }

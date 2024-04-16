@@ -5,13 +5,39 @@ export class SoundGamePlugin extends GamePlugin {
     static readonly key = "sound";
     readonly key = SoundGamePlugin.key;
 
+    private didPerformUserInteraction = false;
+
     private masterVolume: number = 1;
     private effectsVolume: number = 1;
 
     readonly soundtrack = new SoundtrackManager(this.songMapping);
 
+    onReadyToPlayAudio = () => {};
+    isReadyToPlayAudio = false;
+
     constructor(private readonly songMapping: SongMapping = new Map()) {
         super();
+
+        const onEvt = this.onAnyUserInteraction.bind(this);
+        for (const event of ["keydown", "keyup"]) {
+            window.addEventListener(event, onEvt, false);
+        }
+        for (const event of [
+            "mousedown",
+            "mouseup",
+            "contextmenu",
+            "touchstart",
+        ]) {
+            document.body.addEventListener(event, onEvt, false);
+        }
+    }
+
+    private onAnyUserInteraction() {
+        if (this.didPerformUserInteraction) return;
+
+        this.didPerformUserInteraction = true;
+        this.isReadyToPlayAudio = true;
+        this.onReadyToPlayAudio();
     }
 
     setMuted(muted: boolean) {

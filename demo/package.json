@@ -38,6 +38,7 @@
         "@remvst/game-navigation-html": "file:../html",
         "@remvst/game-navigation-performance": "file:../performance",
         "@remvst/game-navigation-pixi": "file:../pixi",
-        "@remvst/game-navigation-react": "file:../react"
+        "@remvst/game-navigation-react": "file:../react",
+        "@remvst/game-navigation-sound": "file:../sound"
     }
 }

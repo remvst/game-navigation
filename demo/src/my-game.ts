@@ -8,6 +8,7 @@ import {
 import { HTMLGamePlugin } from "@remvst/game-navigation-html";
 import { PerformanceGamePlugin } from "@remvst/game-navigation-performance";
 import { PIXIGamePlugin } from "@remvst/game-navigation-pixi";
+import { SoundGamePlugin } from "@remvst/game-navigation-sound";
 import * as PIXI from "pixi.js";
 import { SpinningSquareScreen } from "./screens/spinning-square-screen";
 
@@ -33,6 +34,7 @@ export class MyGame extends Game {
         new PerformanceGamePlugin(
             document.body.querySelector("#perf-container"),
         ),
+        new SoundGamePlugin(),
     ];
 
     setup(): void {

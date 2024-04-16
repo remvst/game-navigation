@@ -19,10 +19,10 @@ export class SoundGamePlugin extends GamePlugin {
         super();
 
         const onEvt = this.onAnyUserInteraction.bind(this);
-        for (const event of ["touchend", "keyup", "touchstart"]) {
+        for (const event of ["keyup", "touchend"]) {
             window.addEventListener(event, onEvt, true);
         }
-        for (const event of ["mouseup", "contextmenu"]) {
+        for (const event of ["mousedown", "mouseup", "contextmenu"]) {
             document.body.addEventListener(event, onEvt, true);
         }
     }

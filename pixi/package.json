@@ -1,6 +1,6 @@
 {
     "name": "@remvst/game-navigation-pixi",
-    "version": "1.7.0",
+    "version": "1.7.1",
     "description": "",
     "main": "lib/index.js",
     "scripts": {
@@ -10,11 +10,9 @@
     "author": "Rémi Vansteelandt",
     "license": "UNLICENSED",
     "peerDependencies": {
-        "@remvst/game-navigation-core": "^1.4.0",
-        "pixi.js": "^7.3.2"
+        "@remvst/game-navigation-core": "^1.4.x"
     },
     "devDependencies": {
-        "pixi.js-legacy": "^7.3.2",
         "typescript": "^5.2.2"
     }
 }

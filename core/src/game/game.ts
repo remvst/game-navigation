@@ -49,7 +49,10 @@ export abstract class Game<ParamsType extends GameParams = GameParams> {
             try {
                 plugin.setup();
             } catch (err) {
-                console.error(`Failed to setup ${plugin.key} plugin: ${err.message}`, err);
+                console.error(
+                    `Failed to setup ${plugin.key} plugin: ${err.message}`,
+                    err,
+                );
                 throw err;
             }
         }

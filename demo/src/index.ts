@@ -1,5 +1,5 @@
-import { MyGame } from "./my-game";
 import "pixi.js-legacy";
+import { MyGame } from "./my-game";
 
 window.addEventListener("load", async () => {
     const game = new MyGame({

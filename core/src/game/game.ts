@@ -46,7 +46,12 @@ export abstract class Game<ParamsType extends GameParams = GameParams> {
         }
 
         for (const plugin of this.plugins) {
-            plugin.setup();
+            try {
+                plugin.setup();
+            } catch (err) {
+                console.error(`Failed to setup ${plugin.key} plugin: ${err.message}`, err);
+                throw err;
+            }
         }
 
         this.lastFrame = window.performance.now();

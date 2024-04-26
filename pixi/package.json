@@ -10,10 +10,11 @@
     "author": "Rémi Vansteelandt",
     "license": "UNLICENSED",
     "peerDependencies": {
-        "@remvst/game-navigation-core": "^1.4.0"
+        "@remvst/game-navigation-core": "^1.4.0",
+        "pixi.js": "^7.3.2"
     },
     "devDependencies": {
-        "pixi.js": "^7.3.2",
+        "pixi.js-legacy": "^7.3.2",
         "typescript": "^5.2.2"
     }
 }

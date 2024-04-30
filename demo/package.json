@@ -6,8 +6,7 @@
     "scripts": {
         "build": "webpack --config webpack.dev.js",
         "start": "webpack serve --open --config webpack.dev.js",
-        "sizetest": "webpack --config webpack.sizetest.js",
-        "test": "npx eslint src"
+        "test": "npm run prettier:check && npm run build"
     },
     "author": "",
     "license": "ISC",

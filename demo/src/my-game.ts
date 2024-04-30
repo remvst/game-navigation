@@ -45,7 +45,7 @@ export class MyGame extends Game {
         this.plugin(PIXIGamePlugin).setDebugVisible(true);
         this.plugin(PerformanceGamePlugin).setRendererVisible(true);
 
-        (this.plugin(PerformanceGamePlugin).gameStats as any).enableExtension(
+        this.plugin(PerformanceGamePlugin).gameStats.enableExtension(
             "pixi",
             [PIXI, this.plugin(PIXIGamePlugin).app],
         );

@@ -1,6 +1,9 @@
 import { GamePlugin } from "@remvst/game-navigation-core";
 import { SongMapping, SoundtrackManager } from "./soundtrack-manager";
 
+export type HowlAndSprite = [Howl, string | undefined];
+export type HowlOrHowlAndSprite = Howl | HowlAndSprite;
+
 export class SoundGamePlugin extends GamePlugin {
     static readonly key = "sound";
     readonly key = SoundGamePlugin.key;
@@ -39,9 +42,12 @@ export class SoundGamePlugin extends GamePlugin {
         Howler.mute(muted);
     }
 
-    playSoundEffect(howl: Howl, relativeVolume: number = 1) {
+    playSoundEffect(sound: HowlOrHowlAndSprite, relativeVolume: number = 1) {
+        const howl = sound instanceof Howl ? sound : sound[0];
+        const sprite = sound instanceof Howl ? undefined : sound[1];
+
         howl.volume(this.effectsVolume * relativeVolume);
-        return howl.play();
+        return howl.play(sprite);
     }
 
     setMasterVolume(volume: number) {

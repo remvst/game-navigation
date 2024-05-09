@@ -10,13 +10,12 @@
     "author": "Rémi Vansteelandt",
     "license": "UNLICENSED",
     "peerDependencies": {
-        "@remvst/game-navigation-core": "^1.4.x"
-    },
-    "dependencies": {
-        "@types/howler": "^2.2.7",
+        "@remvst/game-navigation-core": "^1.4.x",
         "howler": "^2.2.3"
     },
     "devDependencies": {
+        "@types/howler": "^2.2.7",
+        "howler": "^2.2.3",
         "typescript": "^5.2.2"
     }
 }

@@ -47,7 +47,7 @@ export class SoundGamePlugin extends GamePlugin {
         const sprite = sound instanceof Howl ? undefined : sound[1];
 
         howl.volume(this.effectsVolume * relativeVolume);
-        return howl.play(sprite);
+        return howl.play(sprite || undefined);
     }
 
     setMasterVolume(volume: number) {

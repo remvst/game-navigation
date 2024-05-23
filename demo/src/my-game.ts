@@ -1,4 +1,5 @@
 import {
+    BackNavigationPlugin,
     BlurPausingGamePlugin,
     FullscreenButtonGamePlugin,
     Game,
@@ -35,6 +36,7 @@ export class MyGame extends Game {
             document.body.querySelector("#perf-container"),
         ),
         new SoundGamePlugin(),
+        new BackNavigationPlugin(),
     ];
 
     setup(): void {

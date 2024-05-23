@@ -5,6 +5,7 @@ export * from "./game/game-plugin";
 export * from "./interaction/inputs";
 export * from "./interaction/screen-mouse-inputs";
 
+export * from "./navigation/back-navigation-listener";
 export * from "./navigation/resolver";
 export * from "./navigation/screen-stack";
 
@@ -15,6 +16,7 @@ export * from "./plugins/automation-game-plugin";
 export * from "./plugins/blur-pausing-game-plugin";
 export * from "./plugins/fullscreen-button-game-plugin";
 export * from "./plugins/metrics-game-plugin";
+export * from "./plugins/back-navigation-plugin";
 export * from "./plugins/storage-game-plugin";
 export * from "./plugins/time-keys-game-plugin";
 export * from "./plugins/version-label-game-plugin";

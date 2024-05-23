@@ -14,6 +14,8 @@ export class ScreenStack {
     private readonly queue = new OperationQueue();
     prepareScreen: (screen: Screen) => void = () => {};
 
+    onStackChanged: () => void = () => {};
+
     constructor(private readonly game: Game) {}
 
     findByType<T extends Screen>(
@@ -36,6 +38,8 @@ export class ScreenStack {
         if (inclusive && this.current() === screen) {
             this.pop();
         }
+
+        this.onStackChanged();
     }
 
     push(screen: Screen) {

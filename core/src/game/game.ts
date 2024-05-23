@@ -165,6 +165,11 @@ export abstract class Game<ParamsType extends GameParams = GameParams> {
     }
 
     onCurrentScreenChanged() {
-        this.container.style.cursor = this.screenStack.current()?.cursorType;
+        const screen = this.screenStack.current();
+        this.container.style.cursor = screen?.cursorType;
+
+        for (const plugin of this.plugins) {
+            plugin.onCurrentScreenChanged(screen);
+        }
     }
 }

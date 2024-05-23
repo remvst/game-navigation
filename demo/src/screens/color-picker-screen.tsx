@@ -1,8 +1,8 @@
-import { Resolver, UserCancelledError } from "@remvst/game-navigation-core";
+import { BackNavigationListener, Resolver, UserCancelledError } from "@remvst/game-navigation-core";
 import { ReactScreen } from "@remvst/game-navigation-react";
 import React from "react";
 
-export class ColorPickerScreen extends ReactScreen {
+export class ColorPickerScreen extends ReactScreen implements BackNavigationListener {
     resolver: Resolver<number>;
 
     readonly id = "color-picker";
@@ -41,5 +41,9 @@ export class ColorPickerScreen extends ReactScreen {
 
     get absorbCycle() {
         return false;
+    }
+
+    onBackNavigation(): void {
+        this.resolver.reject(new UserCancelledError());
     }
 }

@@ -17,6 +17,7 @@ export abstract class GamePlugin {
     setup(): void {}
 
     setupScreen(screen: Screen): void {}
+    onCurrentScreenChanged(screen: Screen | null): void {}
 
     cycle(elapsed: number) {}
 

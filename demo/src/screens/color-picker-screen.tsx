@@ -1,8 +1,15 @@
-import { BackNavigationListener, Resolver, UserCancelledError } from "@remvst/game-navigation-core";
+import {
+    BackNavigationListener,
+    Resolver,
+    UserCancelledError,
+} from "@remvst/game-navigation-core";
 import { ReactScreen } from "@remvst/game-navigation-react";
 import React from "react";
 
-export class ColorPickerScreen extends ReactScreen implements BackNavigationListener {
+export class ColorPickerScreen
+    extends ReactScreen
+    implements BackNavigationListener
+{
     resolver: Resolver<number>;
 
     readonly id = "color-picker";

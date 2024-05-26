@@ -13,9 +13,9 @@
         "@remvst/game-navigation-core": "^1.4.x"
     },
     "devDependencies": {
-        "typescript": "^5.2.2"
+        "typescript": "^5.4.5"
     },
     "dependencies": {
-        "gamestats.js": "^1.0.5"
+        "gamestats.js": "^1.0.7"
     }
 }

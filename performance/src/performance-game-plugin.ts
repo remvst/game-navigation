@@ -20,7 +20,7 @@ export class PerformanceGamePlugin extends GamePlugin {
     }
 
     setRendererVisible(visible: boolean) {
-        (this.gameStats as any).show(visible);
+        this.gameStats.show(visible);
     }
 
     onFrameStart() {

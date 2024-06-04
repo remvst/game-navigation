@@ -63,7 +63,12 @@ export class SoundtrackManager {
         const { currentHowl, currentHowlId } = this;
         if (currentHowl && currentHowlId) {
             currentHowl.once("fade", () => currentHowl.stop(currentHowlId));
-            currentHowl.fade(this.howlVolume, 0, this.fadeDuration * 1000, currentHowlId);
+            currentHowl.fade(
+                this.howlVolume,
+                0,
+                this.fadeDuration * 1000,
+                currentHowlId,
+            );
         }
 
         this.currentHowl = null;

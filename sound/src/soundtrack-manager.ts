@@ -10,6 +10,8 @@ export class SoundtrackManager {
     currentSoundIndex = Math.floor(Math.random() * 3);
     currentType: string = null;
 
+    fadeDuration = 1;
+
     constructor(private readonly songMapping: SongMapping) {}
 
     setVolume(volume: number) {
@@ -41,11 +43,27 @@ export class SoundtrackManager {
         this.next();
     }
 
+    stop() {
+        this.currentHowl?.stop(this.currentHowlId);
+
+        this.currentType = null;
+        this.currentHowlId = null;
+        this.currentHowl = null;
+    }
+
+    pause() {
+        this.currentHowl?.pause(this.currentHowlId);
+    }
+
+    resume() {
+        this.currentHowl?.play(this.currentHowlId);
+    }
+
     next() {
         const { currentHowl, currentHowlId } = this;
         if (currentHowl && currentHowlId) {
             currentHowl.once("fade", () => currentHowl.stop(currentHowlId));
-            currentHowl.fade(this.howlVolume, 0, 1000, currentHowlId);
+            currentHowl.fade(this.howlVolume, 0, this.fadeDuration * 1000, currentHowlId);
         }
 
         this.currentHowl = null;

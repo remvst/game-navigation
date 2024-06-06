@@ -31,6 +31,10 @@ export class ScreenStack {
     }
 
     popTo(screen: Screen, inclusive: boolean = false) {
+        if (!this.screens.includes(screen)) {
+            return;
+        }
+
         while (this.current() && this.current() !== screen) {
             this.pop();
         }

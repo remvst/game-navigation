@@ -43,7 +43,7 @@ export class Resolver<T> {
     }
 
     private dismiss() {
-        this.screen.game.screenStack.pop();
+        this.screen.game.screenStack.popTo(this.screen, true);
     }
 }
 

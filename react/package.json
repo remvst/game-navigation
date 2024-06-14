@@ -1,7 +1,7 @@
 {
     "name": "@remvst/game-navigation-react",
     "version": "1.4.1",
-    "description": "",
+    "description": "Plugin for displaying screens as React containers",
     "main": "lib/index.js",
     "scripts": {
         "build": "rm -rf lib && tsc",

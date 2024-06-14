@@ -1,7 +1,7 @@
 {
     "name": "@remvst/game-navigation-sound",
     "version": "1.7.0",
-    "description": "",
+    "description": "Plugin for managing sound effects and soundtrack",
     "main": "lib/index.js",
     "scripts": {
         "build": "rm -rf lib && tsc",

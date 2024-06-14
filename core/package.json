@@ -1,7 +1,7 @@
 {
     "name": "@remvst/game-navigation-core",
     "version": "1.11.0",
-    "description": "",
+    "description": "Core functionality and plugins",
     "main": "lib/index.js",
     "scripts": {
         "build": "rm -rf lib && tsc",

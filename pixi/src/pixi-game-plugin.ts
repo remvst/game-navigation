@@ -6,6 +6,7 @@ export interface PIXIGamePluginOptions {
     readonly width: number;
     readonly height: number;
     readonly resolution: number;
+    readonly antialias?: boolean;
 }
 
 export class PIXIGamePlugin extends GamePlugin {
@@ -91,6 +92,7 @@ export class PIXIGamePlugin extends GamePlugin {
     setOptions(options: PIXIGamePluginOptions) {
         if (this.renderer) {
             if (
+                options.antialias === this.options.antialias &&
                 options.resolution === this.options.resolution &&
                 options.width === this.options.width &&
                 options.height === this.options.height
@@ -112,7 +114,7 @@ export class PIXIGamePlugin extends GamePlugin {
                 width: canvasWidth,
                 height: canvasHeight,
                 resolution: 1,
-                antialias: true,
+                antialias: this.options.antialias === undefined ? true : this.options.antialias,
             });
             this.app.ticker.stop(); // core has its own ticker
 

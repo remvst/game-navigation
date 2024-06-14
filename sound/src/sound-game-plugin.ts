@@ -68,9 +68,9 @@ export class SoundGamePlugin extends GamePlugin {
         Howler.mute(this.muted);
     }
 
-    addDebugValues(values: { [key: string]: any; }): void {
+    addDebugValues(values: { [key: string]: any }): void {
         super.addDebugValues(values);
-        values["sound.muted"] = Howler.mute();
+        values["sound.muted"] = this.muted;
         values["sound.isReadyToPlayAudio"] = this.isReadyToPlayAudio;
         values["sound.soundtrack.currentType"] = this.soundtrack.currentType;
     }

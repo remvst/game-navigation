@@ -1,16 +1,16 @@
-import { Container, DisplayObject } from "pixi.js";
+import { Container, DisplayObject, Sprite } from "pixi.js";
 
-export function treeSize(tree: DisplayObject): number {
+export function treeNodes(tree: DisplayObject): number {
     if (tree instanceof Container) {
         return tree.children.reduce((acc, child) => {
-            return acc + treeSize(child);
+            return acc + treeNodes(child);
         }, 1);
-    } else {
-        return 1;
     }
+
+    return 1;
 }
 
-export function renderSize(tree: DisplayObject): number {
+export function renderables(tree: DisplayObject): number {
     if (!tree.visible) {
         return 0;
     }
@@ -21,9 +21,9 @@ export function renderSize(tree: DisplayObject): number {
 
     if (tree instanceof Container) {
         return tree.children.reduce((acc, child) => {
-            return acc + renderSize(child);
+            return acc + renderables(child);
         }, 1);
-    } else {
-        return 1;
     }
+
+    return 1;
 }

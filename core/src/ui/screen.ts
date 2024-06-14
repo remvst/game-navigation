@@ -4,6 +4,9 @@ import { ScreenInputs } from "../interaction/inputs";
 import { ScreenDelegate } from "./screen-delegate";
 
 export abstract class Screen {
+
+    abstract readonly id: string;
+
     game: Game = null;
     cursorType: string = "default";
 
@@ -30,8 +33,6 @@ export abstract class Screen {
             sub.bind(game);
         }
     }
-
-    abstract get id(): string;
 
     setup() {
         this.inputs = new ScreenInputs(this);
@@ -157,8 +158,7 @@ export abstract class Screen {
     }
 
     addDebugValues(values: { [key: string]: any }) {
-        values["screen.id"] = this.id;
-        values["screen.interpolations"] = this.interpolationPool.size;
+        values[this.id + ".interpolations"] = this.interpolationPool.size;
     }
 
     get isForeground() {

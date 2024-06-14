@@ -8,6 +8,7 @@ export class SoundGamePlugin extends GamePlugin {
     static readonly key = "sound";
     readonly key = SoundGamePlugin.key;
 
+    private muted = false;
     private masterVolume: number = 1;
     private effectsVolume: number = 1;
 
@@ -20,6 +21,14 @@ export class SoundGamePlugin extends GamePlugin {
         super();
     }
 
+    watchHowls(howls: Howl[]) {
+        if (this.isReadyToPlayAudio) return;
+
+        for (const howl of howls) {
+            howl.once("play", () => this.onAnySoundPlaying());
+        }
+    }
+
     private onAnySoundPlaying() {
         if (this.isReadyToPlayAudio) return;
         this.isReadyToPlayAudio = true;
@@ -27,7 +36,8 @@ export class SoundGamePlugin extends GamePlugin {
     }
 
     setMuted(muted: boolean) {
-        Howler.mute(muted);
+        this.muted = muted;
+        this.onVolumeUpdated();
     }
 
     playSoundEffect(sound: HowlOrHowlAndSprite, relativeVolume: number = 1) {
@@ -55,5 +65,13 @@ export class SoundGamePlugin extends GamePlugin {
 
     private onVolumeUpdated() {
         Howler.volume(this.masterVolume);
+        Howler.mute(this.muted);
+    }
+
+    addDebugValues(values: { [key: string]: any; }): void {
+        super.addDebugValues(values);
+        values["sound.muted"] = Howler.mute();
+        values["sound.isReadyToPlayAudio"] = this.isReadyToPlayAudio;
+        values["sound.soundtrack.currentType"] = this.soundtrack.currentType;
     }
 }

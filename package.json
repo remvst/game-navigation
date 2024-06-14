@@ -1,7 +1,7 @@
 {
     "name": "@remvst/game-navigation",
     "version": "1.0.2",
-    "description": "",
+    "private": true,
     "scripts": {
         "prettier:fix": "prettier . --write",
         "prettier:check": "prettier . --check",

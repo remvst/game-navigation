@@ -8,8 +8,6 @@ export class SoundGamePlugin extends GamePlugin {
     static readonly key = "sound";
     readonly key = SoundGamePlugin.key;
 
-    private didPerformUserInteraction = false;
-
     private masterVolume: number = 1;
     private effectsVolume: number = 1;
 
@@ -20,20 +18,10 @@ export class SoundGamePlugin extends GamePlugin {
 
     constructor(private readonly songMapping: SongMapping = new Map()) {
         super();
-
-        const onEvt = this.onAnyUserInteraction.bind(this);
-        for (const event of ["keyup", "touchend"]) {
-            window.addEventListener(event, onEvt, true);
-        }
-        for (const event of ["mousedown", "mouseup", "contextmenu"]) {
-            document.body.addEventListener(event, onEvt, true);
-        }
     }
 
-    private onAnyUserInteraction() {
-        if (this.didPerformUserInteraction) return;
-
-        this.didPerformUserInteraction = true;
+    private onAnySoundPlaying() {
+        if (this.isReadyToPlayAudio) return;
         this.isReadyToPlayAudio = true;
         this.onReadyToPlayAudio();
     }
@@ -47,6 +35,11 @@ export class SoundGamePlugin extends GamePlugin {
         const sprite = sound instanceof Howl ? undefined : sound[1];
 
         howl.volume(this.effectsVolume * relativeVolume);
+
+        if (!this.isReadyToPlayAudio) {
+            howl.once("play", () => this.onAnySoundPlaying());
+        }
+
         return howl.play(sprite || undefined);
     }
 

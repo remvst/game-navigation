@@ -1,4 +1,4 @@
-import { Container, DisplayObject, Sprite } from "pixi.js";
+import { Container, DisplayObject } from "pixi.js";
 
 export function treeNodes(tree: DisplayObject): number {
     if (tree instanceof Container) {

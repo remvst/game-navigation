@@ -4,7 +4,6 @@ import { ScreenInputs } from "../interaction/inputs";
 import { ScreenDelegate } from "./screen-delegate";
 
 export abstract class Screen {
-
     abstract readonly id: string;
 
     game: Game = null;

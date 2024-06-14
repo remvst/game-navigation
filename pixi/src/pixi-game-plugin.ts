@@ -114,7 +114,10 @@ export class PIXIGamePlugin extends GamePlugin {
                 width: canvasWidth,
                 height: canvasHeight,
                 resolution: 1,
-                antialias: this.options.antialias === undefined ? true : this.options.antialias,
+                antialias:
+                    this.options.antialias === undefined
+                        ? true
+                        : this.options.antialias,
             });
             this.app.ticker.stop(); // core has its own ticker
 

@@ -65,8 +65,9 @@ export class PIXIGamePlugin extends GamePlugin {
 
     addDebugValues(values: { [key: string]: any }): void {
         super.addDebugValues(values);
-        values["pixi.treeNodes"] = treeNodes(this.stage);
-        values["pixi.renderables"] = renderables(this.stage);
+        values["pixi.renderer.size"] = `${this.width}*${this.height}*${this.resolution}`;
+        values["pixi.stage.treeNodes"] = treeNodes(this.stage);
+        values["pixi.stage.renderables"] = renderables(this.stage);
     }
 
     setNeedsRerender() {

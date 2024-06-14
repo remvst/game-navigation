@@ -6,7 +6,7 @@
         "declaration": true,
         "strict": false,
         "allowJs": false,
-        "outDir": "./lib/esm",
+        "outDir": "./lib",
         "skipLibCheck": true,
         "sourceMap": true
     },

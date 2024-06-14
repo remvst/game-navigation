@@ -145,7 +145,13 @@ export abstract class Game<ParamsType extends GameParams = GameParams> {
     }
 
     getDebugValues(out: { [key: string]: any }) {
-        this.screenStack.current()?.addDebugValues(out);
+        for (const plugin of this.plugins.values()) {
+            plugin.addDebugValues(out);
+        }
+
+        for (const screen of this.screenStack.screens) {
+            screen.addDebugValues(out);
+        }
     }
 
     private parseURL() {

@@ -1,5 +1,6 @@
 import { GamePlugin } from "@remvst/game-navigation-core";
 import { Application, Container, ICanvas, IRenderer, Text } from "pixi.js";
+import { renderSize, treeSize } from "./utils";
 
 export interface PIXIGamePluginOptions {
     readonly width: number;
@@ -59,6 +60,12 @@ export class PIXIGamePlugin extends GamePlugin {
         this.stage.addChild(this.screenContainer, this.debugger);
 
         this.setOptions(this.options);
+    }
+
+    addDebugValues(values: { [key: string]: any }): void {
+        super.addDebugValues(values);
+        values["Views"] = treeSize(this.stage);
+        values["Render calls"] = renderSize(this.stage);
     }
 
     setNeedsRerender() {

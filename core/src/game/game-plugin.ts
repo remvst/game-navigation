@@ -31,4 +31,6 @@ export abstract class GamePlugin {
 
     onFrameStart() {}
     onFrameEnd() {}
+
+    addDebugValues(values: { [key: string]: any }) {}
 }

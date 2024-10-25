@@ -13,6 +13,7 @@
     "devDependencies": {
         "@babel/core": "^7.12.3",
         "@babel/preset-env": "^7.12.1",
+        "@types/three": "^0.169.0",
         "@typescript-eslint/eslint-plugin": "^6.19.1",
         "@typescript-eslint/parser": "^6.19.1",
         "babel-loader": "^8.1.0",
@@ -31,6 +32,7 @@
         "pixi.js-legacy": "^7.3.2",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
+        "three": "^0.169.0",
         "ts-loader": "^9.2.6",
         "typescript": "^5.2.2"
     },
@@ -40,6 +42,7 @@
         "@remvst/game-navigation-performance": "file:../performance",
         "@remvst/game-navigation-pixi": "file:../pixi",
         "@remvst/game-navigation-react": "file:../react",
-        "@remvst/game-navigation-sound": "file:../sound"
+        "@remvst/game-navigation-sound": "file:../sound",
+        "@remvst/game-navigation-three": "file:../three"
     }
 }

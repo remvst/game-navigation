@@ -1,16 +1,11 @@
-import {
-    BindingDefinition,
-    BindingDefinitionSet,
-    KeyBindingsSettings,
-    Keyboard,
-    isDown,
-    keyboard,
-    set,
-} from "@remvst/client-inputs";
+import { isDown } from "@remvst/client-inputs";
 import { navigationFlow } from "@remvst/game-navigation-core";
-import { PIXIScreen } from "@remvst/game-navigation-pixi";
-import { Sprite, Text, Texture } from "pixi.js";
+import { PIXIGamePlugin, PIXIScreen } from "@remvst/game-navigation-pixi";
+import { Sprite, Texture } from "pixi.js";
+import { KEY_BINDINGS } from "../key-binding-settings";
 import { ColorPickerScreen } from "./color-picker-screen";
+import { InstructionsScreen } from "./instructions-screen";
+import { SpinningCubeScreen } from "./spinning-cube-screen";
 
 export class SpinningSquareScreen extends PIXIScreen {
     readonly id = "spinning-square";
@@ -23,59 +18,29 @@ export class SpinningSquareScreen extends PIXIScreen {
         return square;
     })();
 
-    private readonly keyBindingSettings = (() => {
-        const definitions = new BindingDefinitionSet([
-            new BindingDefinition(
-                "navigation",
-                "changeColor",
-                "Change Color",
-                true,
-                set(keyboard(Keyboard.ESC), keyboard(Keyboard.BACKSPACE)),
-            ),
-        ]);
-
-        return new KeyBindingsSettings(definitions);
-    })();
-
-    private readonly instruction = (() => {
-        const text = new Text("", {
-            fill: "#fff",
-            align: "center",
-        });
-
-        text.text = this.keyBindingSettings.definitionSet.definitions
-            .map((definition) => {
-                const label = definition.label;
-                const keys = this.keyBindingSettings
-                    .binding(definition.key)
-                    .bindings.map((binding) => binding.label)
-                    .join(" / ");
-
-                return `${label}: ${keys}`;
-            })
-            .join("\n");
-
-        text.anchor.set(0.5, 0);
-        return text;
-    })();
-
-    constructor(private readonly color: number) {
+    constructor(private color: number) {
         super();
+        this.addSubscreen(new InstructionsScreen());
     }
 
     setup(): void {
         super.setup();
+        (
+            this.game.plugin(PIXIGamePlugin).renderer.view as HTMLCanvasElement
+        ).style.visibility = "visible";
 
         this.square.position.set(
             this.game.params.width / 2,
             this.game.params.height / 2,
         );
         this.view.addChild(this.square);
+    }
 
-        this.instruction.position.set(this.game.params.width / 2, 20);
-        this.view.addChild(this.instruction);
-
-        this.changeColor();
+    destroy(): void {
+        super.destroy();
+        (
+            this.game.plugin(PIXIGamePlugin).renderer.view as HTMLCanvasElement
+        ).style.visibility = "hidden";
     }
 
     cycle(elapsed: number): void {
@@ -84,23 +49,26 @@ export class SpinningSquareScreen extends PIXIScreen {
 
         if (
             this.isTakingInputs &&
-            isDown(
-                this.game.inputs,
-                this.keyBindingSettings.binding("changeColor"),
-            )
+            isDown(this.game.inputs, KEY_BINDINGS.binding("changeColor"))
         ) {
             this.changeColor();
         }
 
-        this.instruction.visible = this.isTakingInputs;
+        if (
+            this.isTakingInputs &&
+            isDown(this.game.inputs, KEY_BINDINGS.binding("3dmode"))
+        ) {
+            this.game.screenStack.reset(new SpinningCubeScreen(this.color));
+        }
     }
 
     private changeColor() {
         navigationFlow(
             (async () => {
-                this.square.tint = await this.game.screenStack.resolvableScreen(
-                    new ColorPickerScreen(),
-                );
+                this.square.tint = this.color =
+                    await this.game.screenStack.resolvableScreen(
+                        new ColorPickerScreen(),
+                    );
             })(),
         );
     }

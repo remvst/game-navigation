@@ -23,6 +23,7 @@
         "performance",
         "pixi",
         "react",
-        "sound"
+        "sound",
+        "three"
     ]
 }

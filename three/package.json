@@ -1,0 +1,20 @@
+{
+    "name": "@remvst/game-navigation-three",
+    "version": "1.0.0",
+    "description": "",
+    "main": "lib/index.js",
+    "scripts": {
+        "build": "rm -rf lib && tsc",
+        "prepublishOnly": "npm i && npm run build"
+    },
+    "author": "Rémi Vansteelandt",
+    "license": "UNLICENSED",
+    "peerDependencies": {
+        "@remvst/game-navigation-core": "^1.11.x",
+        "three": "^0.169.x"
+    },
+    "devDependencies": {
+        "@types/three": "^0.169.0",
+        "typescript": "^5.2.2"
+    }
+}

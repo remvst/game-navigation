@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "target": "es2019",
+        "module": "ESNext",
+        "moduleResolution": "node",
+        "declaration": true,
+        "strict": false,
+        "allowJs": false,
+        "outDir": "./lib",
+        "skipLibCheck": true,
+        "sourceMap": true
+    },
+    "include": ["./src/**/*"],
+    "exclude": ["node_modules"]
+}

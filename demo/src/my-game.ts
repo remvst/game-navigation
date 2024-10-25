@@ -10,12 +10,18 @@ import { HTMLGamePlugin } from "@remvst/game-navigation-html";
 import { PerformanceGamePlugin } from "@remvst/game-navigation-performance";
 import { PIXIGamePlugin } from "@remvst/game-navigation-pixi";
 import { SoundGamePlugin } from "@remvst/game-navigation-sound";
+import { THREEGamePlugin } from "@remvst/game-navigation-three";
 import * as PIXI from "pixi.js";
 import { SpinningSquareScreen } from "./screens/spinning-square-screen";
 
 export class MyGame extends Game {
     readonly plugins = [
         new PIXIGamePlugin(document.querySelector("#canvas-container"), {
+            resolution: 1,
+            width: this.params.width,
+            height: this.params.height,
+        }),
+        new THREEGamePlugin(document.querySelector("#canvas-container"), {
             resolution: 1,
             width: this.params.width,
             height: this.params.height,

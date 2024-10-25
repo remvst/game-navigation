@@ -13,6 +13,7 @@ npm install @remvst/game-navigation-core
 npm install @remvst/game-navigation-html
 npm install @remvst/game-navigation-react
 npm install @remvst/game-navigation-pixi
+npm install @remvst/game-navigation-three
 npm install @remvst/game-navigation-sound
 npm install @remvst/game-navigation-performance
 ```

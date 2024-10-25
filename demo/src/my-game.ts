@@ -17,12 +17,12 @@ import { SpinningSquareScreen } from "./screens/spinning-square-screen";
 export class MyGame extends Game {
     readonly plugins = [
         new PIXIGamePlugin(document.querySelector("#canvas-container"), {
-            resolution: 1,
+            resolution: window.devicePixelRatio,
             width: this.params.width,
             height: this.params.height,
         }),
         new THREEGamePlugin(document.querySelector("#canvas-container"), {
-            resolution: 1,
+            resolution: window.devicePixelRatio,
             width: this.params.width,
             height: this.params.height,
         }),

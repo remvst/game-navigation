@@ -14,18 +14,8 @@ export class THREEGamePlugin extends GamePlugin {
     readonly key = THREEGamePlugin.key;
 
     // Rendering
-    renderer: WebGLRenderer = (() => {
-        const renderer = new WebGLRenderer();
-        renderer.shadowMap.enabled = true;
-        renderer.setPixelRatio(window.devicePixelRatio);
-        renderer.setSize(this.options.width, this.options.height);
-        return renderer;
-    })();
+    renderer: WebGLRenderer;
     private needsRerender = true;
-
-    private canvas: HTMLCanvasElement = (() => {
-        return this.renderer.domElement;
-    })();
 
     constructor(
         readonly canvasContainer: HTMLElement,
@@ -47,9 +37,12 @@ export class THREEGamePlugin extends GamePlugin {
     setup(): void {
         super.setup();
 
-        this.setOptions(this.options);
+        this.renderer = new WebGLRenderer();
 
-        this.canvasContainer.appendChild(this.canvas);
+        this.setOptions(this.options);
+        this.updateRenderer();
+
+        this.canvasContainer.appendChild(this.renderer.domElement);
     }
 
     addDebugValues(values: { [key: string]: any }): void {
@@ -94,14 +87,8 @@ export class THREEGamePlugin extends GamePlugin {
     }
 
     updateRenderer() {
-        const canvasWidth = this.options.width * this.options.resolution;
-        const canvasHeight = this.options.height * this.options.resolution;
-
-        this.renderer.setSize(canvasWidth, canvasHeight);
+        this.renderer.setSize(this.options.width, this.options.height, false);
         this.renderer.setPixelRatio(this.options.resolution);
-
-        this.renderer.domElement.style.width = null;
-        this.renderer.domElement.style.height = null;
 
         this.updateLayout();
     }

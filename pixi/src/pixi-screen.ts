@@ -5,11 +5,19 @@ import { PIXIGamePlugin } from "./pixi-game-plugin";
 export abstract class PIXIScreen extends Screen {
     view: Container;
 
+    get screenContainer(): Container {
+        return this.plugin.screenContainer;
+    }
+
+    get plugin(): PIXIGamePlugin {
+        return this.game.plugin(PIXIGamePlugin);
+    }
+
     setup() {
         super.setup();
 
         this.view = new Container();
-        this.game.plugin(PIXIGamePlugin).screenContainer.addChild(this.view);
+        this.screenContainer.addChild(this.view);
     }
 
     destroy() {
@@ -19,18 +27,18 @@ export abstract class PIXIScreen extends Screen {
 
     cycle(elapsed: number): void {
         super.cycle(elapsed);
-        this.game.plugin(PIXIGamePlugin).setNeedsRerender();
+        this.plugin.setNeedsRerender();
     }
 
     get width(): number {
-        return this.game.plugin(PIXIGamePlugin).width;
+        return this.plugin.width;
     }
 
     get height(): number {
-        return this.game.plugin(PIXIGamePlugin).height;
+        return this.plugin.height;
     }
 
     get resolution(): number {
-        return this.game.plugin(PIXIGamePlugin).resolution;
+        return this.plugin.resolution;
     }
 }

@@ -21,7 +21,7 @@ export interface PIXIGamePluginOptions {
 }
 
 export class PIXIGamePlugin extends GamePlugin {
-    static readonly key = "pixi";
+    static readonly key: string = "pixi";
     readonly key = PIXIGamePlugin.key;
 
     private canvas: ICanvas;

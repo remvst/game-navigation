@@ -1,5 +1,12 @@
 import { GamePlugin } from "@remvst/game-navigation-core";
-import { Application, Container, ICanvas, IRenderer, Text } from "pixi.js";
+import {
+    Application,
+    ColorSource,
+    Container,
+    ICanvas,
+    IRenderer,
+    Text,
+} from "pixi.js";
 import { renderables, treeNodes } from "./utils";
 
 export interface PIXIGamePluginOptions {
@@ -7,6 +14,10 @@ export interface PIXIGamePluginOptions {
     readonly height: number;
     readonly resolution: number;
     readonly antialias?: boolean;
+    readonly backgroundAlpha?: number;
+    readonly backgroundColor?: ColorSource;
+    readonly clearBeforeRender?: boolean;
+    readonly preserveDrawingBuffer?: boolean;
 }
 
 export class PIXIGamePlugin extends GamePlugin {
@@ -111,38 +122,62 @@ export class PIXIGamePlugin extends GamePlugin {
         const canvasWidth = this.options.width * this.options.resolution;
         const canvasHeight = this.options.height * this.options.resolution;
 
+        const antialias =
+            this.options.antialias === undefined
+                ? true
+                : this.options.antialias;
+
+        const clearBeforeRender =
+            this.options.clearBeforeRender === undefined
+                ? true
+                : this.options.clearBeforeRender;
+
+        const backgroundAlpha =
+            this.options.backgroundAlpha === undefined
+                ? 1
+                : this.options.backgroundAlpha;
+
+        const backgroundColor =
+            this.options.backgroundColor === undefined
+                ? 0x0
+                : this.options.backgroundColor;
+
+        const preserveDrawingBuffer =
+            this.options.preserveDrawingBuffer === undefined
+                ? false
+                : this.options.preserveDrawingBuffer;
+
         if (!this.app) {
             this.app = new Application({
                 width: canvasWidth,
                 height: canvasHeight,
                 resolution: 1,
-                antialias:
-                    this.options.antialias === undefined
-                        ? true
-                        : this.options.antialias,
+                antialias,
+                clearBeforeRender,
+                backgroundAlpha,
+                backgroundColor,
+                preserveDrawingBuffer,
             });
             this.app.ticker.stop(); // core has its own ticker
 
             // PIXI renderer
             this.renderer = this.app.renderer;
-            this.renderer.options.antialias = true;
 
             this.canvas = this.renderer.view;
             this.canvasContainer.appendChild(
                 this.canvas as unknown as HTMLElement,
             );
         } else {
+            this.renderer.options.antialias = antialias;
+            this.renderer.options.clearBeforeRender = clearBeforeRender;
+            this.renderer.options.backgroundAlpha = backgroundAlpha;
+            this.renderer.options.backgroundColor = backgroundColor;
+            this.renderer.options.preserveDrawingBuffer = preserveDrawingBuffer;
             this.renderer.resize(canvasWidth, canvasHeight);
         }
 
         this.stage.scale.x = this.options.resolution;
         this.stage.scale.y = this.options.resolution;
-
-        const cssRoot = document.querySelector(":root") as HTMLElement;
-        cssRoot.style.setProperty(
-            "--aspect-ratio",
-            `${canvasWidth} / ${canvasHeight}`,
-        );
 
         this.updateLayout();
     }

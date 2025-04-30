@@ -159,6 +159,10 @@ export abstract class Screen {
     addDebugValues(values: { [key: string]: any }) {
         values[`screens[${this.id}].interpolations`] =
             this.interpolationPool.size;
+
+        for (const sub of this.subscreens) {
+            sub.addDebugValues(values);
+        }
     }
 
     get isForeground() {

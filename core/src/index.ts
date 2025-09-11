@@ -15,6 +15,7 @@ export * from "./ui/screen-delegate";
 export * from "./plugins/automation-game-plugin";
 export * from "./plugins/back-navigation-plugin";
 export * from "./plugins/blur-pausing-game-plugin";
+export * from "./plugins/dom-debugger-game-plugin";
 export * from "./plugins/fullscreen-button-game-plugin";
 export * from "./plugins/metrics-game-plugin";
 export * from "./plugins/storage-game-plugin";

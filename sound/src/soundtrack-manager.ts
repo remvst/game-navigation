@@ -104,7 +104,7 @@ export class SoundtrackManager {
 
         const howlId = howl.play();
         howl.once("end", () => {
-            this.currentHowl?.stop(this.currentHowlId);
+            if (this.currentHowl !== howl || this.currentHowlId !== howlId) return;
             this.next();
         });
 
